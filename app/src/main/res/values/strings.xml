@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Мои попытки в РМП</string>
+    <string name="greet">Hello World</string>
+    <string name="greet_if_logged">Hello</string>
+    <string name="auth_button">Enter the Matrix</string>
+    <string name="auth_nickname">Type your name</string>
+    <string name="auth_password_hint">Password</string>
+    <string name="pass_visibility">password visibility</string>
+</resources>
