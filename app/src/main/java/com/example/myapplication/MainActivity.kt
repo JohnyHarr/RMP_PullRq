@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 //import android.app.Activity
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -8,8 +9,6 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityMainBinding
-import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
 
 
 class MainActivity : AppCompatActivity(), View.OnTouchListener{
@@ -27,6 +26,7 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener{
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onResume() {
         super.onResume()
         if (activityWerePaused){
@@ -37,23 +37,18 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener{
         }
        binding.butPasswordVisible.setOnTouchListener(this)
 
-
-
-
-
     }
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean{//this function is used for implementing password visibility feature
-         when(motionEvent.action){
+          when(motionEvent.action){
             MotionEvent.ACTION_DOWN -> {
-               // binding.edPassword.inputType=InputType.TYPE_NUMBER_VARIATION_PASSWORD
                 binding.edPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 Log.d("name", "password shall be shown")
 
             }
-            MotionEvent.ACTION_UP -> { //binding.edPassword.inputType=InputType.TYPE_TEXT_VARIATION_PASSWORD
+            MotionEvent.ACTION_UP -> {
                 binding.edPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                view.performClick()
+                binding.butPasswordVisible.performClick()
                 Log.d("name", "password shall not be shown")
             }
              else -> return false
