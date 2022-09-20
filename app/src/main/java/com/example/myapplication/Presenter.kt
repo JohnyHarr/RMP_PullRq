@@ -9,14 +9,15 @@ import com.example.myapplication.SharedPrefsIDs.loggedUserLogin
 import com.example.myapplication.SharedPrefsIDs.loggedUserPassword
 
 
-class PresenterAuth(private var view: AuthView, private val sharedPref: SharedPreferences) {
+
+class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPreferences) {
     private lateinit var model: UserModel
 
     fun init(){
         model= UserModel()
         model.init()
         if(sharedPref.getBoolean(isLogged, false)) {
-            view.enterMainScreen()
+            view.enterAnotherScreen()
             tryLogInAction(sharedPref.getString(loggedUserLogin, "empty")!!, sharedPref.getString(loggedUserPassword, "empty")!!)
         }
         model.closeRealm()
@@ -36,30 +37,29 @@ class PresenterAuth(private var view: AuthView, private val sharedPref: SharedPr
     }
 
     fun tryLogInAction(_login:String, _password:String){
-        //model.pushUser(RealmUserData())
         if(checkLoginPasswordIsEmpty(_login,_password)) return
         val userData:RealmUserData?=model.getUser(_login)
         if(userData!=null){
             if(userData.password != _password)
                 view.showLogInError()
             else{
-                Log.d("name", "Login successful")
+                Log.d("debug", "Login successful")
                sharedPref.edit(commit = true){
                    putBoolean(isLogged, true)
                    putString(loggedUserLogin, _login)
                    putString(loggedUserPassword, _password)
                }
-                view.enterMainScreen()
+                view.enterAnotherScreen()
         }
         }
         else view.showLogInError()
     }
 
-    fun createUser(_login: String, _password: String, _firstName:String, _lastName: String){
-        if(checkLoginPasswordIsEmpty(_login,_password)) return
+    fun createUser(_login: String, _password: String, _firstName:String, _lastName: String): Boolean{
+        if(checkLoginPasswordIsEmpty(_login,_password)) return false
         if(model.getUser(_login)!=null){
-            view.showLoginEmptyError()
-            return
+            view.showLoginExistError()
+            return false
         }
         val userData=RealmUserData().apply {
             login=_login
@@ -67,14 +67,15 @@ class PresenterAuth(private var view: AuthView, private val sharedPref: SharedPr
             userFirstName=_firstName
             userLastName=_lastName
         }
-        Log.d("name", "trying to push user")
+        Log.d("debug", "trying to push user")
         model.pushUser(userData)
+        return true
     }
 
     fun showUsers(){
        val result=model.getUsers()
         for(i in result.indices){
-            Log.d("name", "User_login: ${result[i].login} " +
+            Log.d("debug", "User_login: ${result[i].login} " +
                     "User_password: ${result[i].password}")
         }
     }
@@ -89,12 +90,12 @@ class PresenterAuth(private var view: AuthView, private val sharedPref: SharedPr
     }
 
     fun onActivityPause(){
-        Log.d("name", "Activity paused; closing UsersRealm")
+        Log.d("debug", "Activity paused; closing UsersRealm")
         model.closeRealm()
     }
 
     fun onActivityResume(){
-        Log.d("name", "Activity resumed; initializing UsersRealm")
+        Log.d("debug", "Activity resumed; initializing UsersRealm")
         model.init()
     }
 }

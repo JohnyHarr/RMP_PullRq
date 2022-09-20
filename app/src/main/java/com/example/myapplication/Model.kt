@@ -6,15 +6,7 @@ import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.query.RealmResults
 
-interface UserModelInterface
-{
-    fun init()
-    fun closeRealm()
-    fun pushUser(user: RealmUserData)
-    fun getUser(_login: String): RealmUserData?
-    fun getUsers():RealmResults<RealmUserData>?
-    fun deleteUsers()
-}
+
 
 class UserModel: UserModelInterface {
     private val realmUsersCfg=RealmConfiguration.Builder(schema = setOf(RealmUserData::class)).build()
@@ -30,7 +22,7 @@ class UserModel: UserModelInterface {
 
     override fun pushUser(user: RealmUserData){
         realmUserDB.writeBlocking {
-            Log.d("name", "User ${user.login} with ${user.password}")
+            Log.d("debug", "User ${user.login} with ${user.password}")
             copyToRealm(user)
         }
     }
@@ -41,7 +33,7 @@ class UserModel: UserModelInterface {
     }
 
     override fun getUser(_login: String):RealmUserData? {
-        Log.d("name", "trying to get user")
+        Log.d("debug", "trying to get user")
         return realmUserDB.query<RealmUserData>("login=$0", _login).first().find()
     }
 
@@ -51,12 +43,12 @@ class UserModel: UserModelInterface {
 
     override fun deleteUsers() {
         realmUserDB.writeBlocking {
-            // fetch all frogs from the realm
+            // fetch all users from the realm
             val frogs: RealmResults<RealmUserData> = this.query<RealmUserData>().find()
             // call delete on the results of a query to delete those objects permanently
             delete(frogs)
         }
-       // Realm.deleteRealm(realmUsersCfg)
+       // Realm.deleteRealm(realmUsersCfg)//USE IF YOU NEED TO REWRITE User class
     }
 
 }

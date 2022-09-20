@@ -2,7 +2,7 @@
     <string name="app_name">Store</string>
     <string name="greet">Hello World</string>
     <string name="greet_if_logged">Hello</string>
-    <string name="auth_button">Enter the Matrix</string>
+    <string name="auth_button">Sign In</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="auth_nickname">Type your name</string>
     <string name="auth_password_hint">Password</string>
@@ -10,6 +10,7 @@
     <string name="auth_lastname_hint">Lastname</string>
     <string name="pass_visibility">password visibility</string>
     <string name="loginEmpty">Login cannot be empty</string>
+    <string name="loginAlreadyExists">Login already exists</string>
     <string name="logInError">Incorrect login or password</string>
     <string name="passwordEmpty">Password cannot be empty</string>
 </resources>
