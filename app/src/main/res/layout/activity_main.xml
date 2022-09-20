@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/edLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="192dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/log_in_button"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -32,38 +32,27 @@
         android:text="@string/auth_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/edPassword"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edPassword"
         app:layout_constraintTop_toBottomOf="@+id/edPassword"
-        app:layout_constraintVertical_bias="0.801" />
-
-    <TextView
-        android:id="@+id/greet"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="@string/greet"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName" />
+        app:layout_constraintVertical_bias="0.683" />
 
     <EditText
         android:id="@+id/edPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:autofillHints="password"
         android:ems="10"
         android:hint="@string/auth_password_hint"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="#78909C"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintEnd_toEndOf="@+id/edLogin"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edLogin"
+        app:layout_constraintTop_toBottomOf="@+id/loginError">
+
     </EditText>
 
     <ImageButton
@@ -71,14 +60,77 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/pass_visibility"
         app:layout_constraintBottom_toBottomOf="@+id/edPassword"
         app:layout_constraintEnd_toEndOf="@+id/edPassword"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/edPassword"
         app:layout_constraintTop_toTopOf="@+id/edPassword"
         app:srcCompat="@android:drawable/ic_menu_view"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-        android:contentDescription="@string/pass_visibility"/>
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/sign_up_button"
+        app:layout_constraintEnd_toEndOf="@+id/log_in_button"
+        app:layout_constraintStart_toStartOf="@+id/log_in_button"
+        app:layout_constraintTop_toBottomOf="@+id/log_in_button" />
+
+    <TextView
+        android:id="@+id/loginError"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/loginEmpty"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/edLogin"
+        app:layout_constraintStart_toStartOf="@+id/edLogin"
+        app:layout_constraintTop_toBottomOf="@+id/edLogin" />
+
+    <TextView
+        android:id="@+id/passwordError"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/passwordEmpty"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/edPassword"
+        app:layout_constraintStart_toStartOf="@+id/edPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+
+    <EditText
+        android:id="@+id/edFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/auth_firstname_hint"
+        android:inputType="textPersonName"
+        android:visibility="gone
+"
+        app:layout_constraintEnd_toEndOf="@+id/edPassword"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edPassword"
+        app:layout_constraintTop_toBottomOf="@+id/passwordError" />
+
+    <EditText
+        android:id="@+id/edLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="@string/auth_lastname_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edPassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/edPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edFirstName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
