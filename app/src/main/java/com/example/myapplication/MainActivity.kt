@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivityMainBinding
@@ -30,12 +31,7 @@ open class MainActivity : AppCompatActivity(),AuthView{
         }
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
         binding.buttonSignUp.setOnClickListener{//sending user onto SignUp screen if user wants to sign up
-            val intent=Intent(this,ActivitySignUp::class.java)
-            startActivity(intent)
-        }
-        binding.registrationKey.setOnClickListener{
-            val intent=Intent(this,ActivitySignUp::class.java)
-            startActivity(intent)
+            setRegistrationState()
         }
         Log.d("debug", "onCreate completed")
     }
@@ -49,6 +45,11 @@ open class MainActivity : AppCompatActivity(),AuthView{
     override fun onPause() {
         super.onPause()
         presenter.onActivityPause()//closing Realm because user doesn't need it right now
+    }
+
+    override fun setRegistrationState(){
+        binding.edFirstnameLayout.visibility=View.VISIBLE
+        binding.edLastnameLayout.visibility=View.VISIBLE
     }
 
     override fun showLogInError() {

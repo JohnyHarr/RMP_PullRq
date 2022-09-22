@@ -9,4 +9,5 @@ interface AuthView{
     fun enterAnotherScreen()// used to create new action and send user onto another screen
     fun showLoginExistError()
     fun turnOffAllErrors()
+    fun setRegistrationState()
 }
