@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivityMainBinding
@@ -25,13 +24,17 @@ open class MainActivity : AppCompatActivity(),AuthView{
         presenter.init()//initializing Realm
         binding.logInButton.setOnClickListener {//making error messages gone if they were visible
             turnOffAllErrors()
-            Log.d("debug", "name=${binding.edLoginLayout.editText!!.text.toString().trim()}/${binding.edPasswordLayout.editText!!.text.toString().trim()}")
             presenter.tryLogInAction(binding.edLoginLayout.editText!!.text.toString().trim(),binding.edPasswordLayout.editText!!.text.toString().trim())//LogIn call
-
+            Log.d("debug", "name=${binding.edLoginLayout.editText!!.text.toString().trim()}/${binding.edPasswordLayout.editText!!.text.toString().trim()}")
         }
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
         binding.buttonSignUp.setOnClickListener{//sending user onto SignUp screen if user wants to sign up
-            setRegistrationState()
+            val intent=Intent(this,ActivitySignUp::class.java)
+            startActivity(intent)
+        }
+        binding.registrationKey.setOnClickListener{
+            val intent=Intent(this,ActivitySignUp::class.java)
+            startActivity(intent)
         }
         Log.d("debug", "onCreate completed")
     }
@@ -45,11 +48,6 @@ open class MainActivity : AppCompatActivity(),AuthView{
     override fun onPause() {
         super.onPause()
         presenter.onActivityPause()//closing Realm because user doesn't need it right now
-    }
-
-    override fun setRegistrationState(){
-        binding.edFirstnameLayout.visibility=View.VISIBLE
-        binding.edLastnameLayout.visibility=View.VISIBLE
     }
 
     override fun showLogInError() {

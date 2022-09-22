@@ -7,37 +7,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <Button
         android:id="@+id/log_in_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
         android:text="@string/auth_button"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonSignUp"
-        app:layout_constraintStart_toStartOf="@+id/buttonSignUp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edPasswordLayout"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/edPasswordLayout"
+        app:layout_constraintTop_toBottomOf="@+id/edPasswordLayout"
+        app:layout_constraintVertical_bias="0.561" />
 
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="8dp"
         android:text="@string/sign_up_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edPasswordLayout"
+        app:layout_constraintEnd_toEndOf="@+id/log_in_button"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edPasswordLayout"
-        app:layout_constraintTop_toBottomOf="@+id/edPasswordLayout"
-        app:layout_constraintVertical_bias="0.71000004" />
+        app:layout_constraintStart_toStartOf="@+id/log_in_button"
+        app:layout_constraintTop_toBottomOf="@+id/log_in_button" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/edLoginLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:hint="@string/auth_login_hint"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
         app:boxBackgroundColor="#00FFFFFF"
         app:errorEnabled="false"
         app:hintAnimationEnabled="true"
@@ -46,14 +48,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999"
-        app:passwordToggleEnabled="false">
+        app:layout_constraintVertical_bias="0.29000002"
+        app:passwordToggleEnabled="false"
+        app:boxStrokeErrorColor="@color/design_default_color_error">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#757575"
             android:inputType="textEmailAddress"
+            android:textColorHint="#757575"
             tools:ignore="TextContrastCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,14 +65,16 @@
         android:id="@+id/edPasswordLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="50dp"
         android:hint="@string/auth_password_hint"
         app:boxBackgroundColor="#00FFFFFF"
         app:errorEnabled="false"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:layout_constraintEnd_toEndOf="@+id/edLoginLayout"
-        app:layout_constraintStart_toStartOf="@+id/edLoginLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edLoginLayout"
         app:passwordToggleEnabled="true"
         app:boxStrokeErrorColor="@color/design_default_color_error">
@@ -77,60 +82,24 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/edFirstnameLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="@string/auth_firstname_hint"
-        android:visibility="gone"
-        app:boxBackgroundColor="#00FFFFFF"
-        app:errorEnabled="false"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        app:layout_constraintEnd_toEndOf="@+id/edLoginLayout"
-        app:layout_constraintStart_toStartOf="@+id/edLoginLayout"
-        app:layout_constraintTop_toBottomOf="@+id/edPasswordLayout"
-        app:boxStrokeErrorColor="@color/design_default_color_error">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck,TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/edLastnameLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="@string/auth_lastname_hint"
-        android:visibility="gone"
-        app:boxBackgroundColor="#00FFFFFF"
-        app:errorEnabled="false"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        app:layout_constraintEnd_toEndOf="@+id/edLoginLayout"
-        app:layout_constraintStart_toStartOf="@+id/edLoginLayout"
-        app:layout_constraintTop_toBottomOf="@+id/edFirstnameLayout"
-        app:passwordToggleEnabled="false"
-        app:boxStrokeErrorColor="@color/design_default_color_error">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck,TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/registrationKey"
+        android:layout_width="252dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="8dp"
+        android:gravity="end"
+        android:text="@string/sign_up_button"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/edPasswordLayout"
+        app:layout_constraintStart_toStartOf="@+id/edPasswordLayout"
+        app:layout_constraintTop_toBottomOf="@+id/edPasswordLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
