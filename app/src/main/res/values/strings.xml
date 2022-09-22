@@ -4,7 +4,8 @@
     <string name="greet_if_logged">Hello</string>
     <string name="auth_button">Sign In</string>
     <string name="sign_up_button">Sign Up</string>
-    <string name="auth_nickname">Type your name</string>
+    <string name="sign_up_button_text">I\'m new user</string>
+    <string name="auth_login_hint">Login</string>
     <string name="auth_password_hint">Password</string>
     <string name="auth_firstname_hint">Firstname</string>
     <string name="auth_lastname_hint">Lastname</string>

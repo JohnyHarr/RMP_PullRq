@@ -39,6 +39,7 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
     fun tryLogInAction(_login:String, _password:String){
         if(checkLoginPasswordIsEmpty(_login,_password)) return
         val userData:RealmUserData?=model.getUser(_login)
+        Log.d("debug", "fetched user: ${userData?.login}/${userData?.password}")
         if(userData!=null){
             if(userData.password != _password)
                 view.showLogInError()
@@ -74,9 +75,9 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
 
     fun showUsers(){
        val result=model.getUsers()
-        for(i in result.indices){
-            Log.d("debug", "User_login: ${result[i].login} " +
-                    "User_password: ${result[i].password}")
+        result.forEach{
+            Log.d("debug", "User_login: ${it.login} " +
+                    "User_password: ${it.password}")
         }
     }
 
@@ -97,5 +98,6 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
     fun onActivityResume(){
         Log.d("debug", "Activity resumed; initializing UsersRealm")
         model.init()
+
     }
 }
