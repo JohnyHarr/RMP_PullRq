@@ -27,6 +27,7 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
                 finish()
 
         }
+        binding.edLoginLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
         presenter= PresenterAuth(this, getSharedPreferences(sharedPrefName,Context.MODE_PRIVATE))
         presenter.init()

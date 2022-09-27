@@ -17,6 +17,11 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
         if(sharedPref.getBoolean(isLogged, false)) {
             if(tryLogInAction(sharedPref.getString(loggedUserLogin, "empty")!!, sharedPref.getString(loggedUserPassword, "empty")!!))
                 view.enterAnotherScreen()
+            else
+                sharedPref.edit(commit = true){
+                    putBoolean(isLogged, false)
+                }
+
         }
         //model.closeRealm()
     }
@@ -42,7 +47,11 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
             return false
         }
         view.enterAnotherScreen()
-        sharedPref.edit { isLogged=true }
+        sharedPref.edit(commit = true){
+            putBoolean(isLogged, true)
+            putString(loggedUserLogin, _login)
+            putString(loggedUserPassword, _password)
+        }
         return true
     }
 
