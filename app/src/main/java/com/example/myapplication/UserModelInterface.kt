@@ -4,10 +4,8 @@ import io.realm.kotlin.query.RealmResults
 
 interface UserModelInterface
 {
-    fun init()
+    fun logIn(_login: String, _password:String):Boolean
+    fun signUp(user: RealmUserData):Boolean
     fun closeRealm()
-    fun pushUser(user: RealmUserData)
-    fun getUser(_login: String): RealmUserData?
-    fun getUsers(): RealmResults<RealmUserData>?
     fun deleteUsers()
 }

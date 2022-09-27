@@ -82,7 +82,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:textColorHint="#757575" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +93,7 @@
         android:layout_height="26dp"
         android:layout_marginTop="8dp"
         android:gravity="end"
-        android:text="@string/sign_up_button"
+        android:text="@string/sign_up_button_text"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/edPasswordLayout"
         app:layout_constraintStart_toStartOf="@+id/edPasswordLayout"

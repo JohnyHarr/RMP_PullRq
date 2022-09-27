@@ -15,7 +15,6 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
    private lateinit var presenter: PresenterAuth
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         binding=ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -30,21 +29,11 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
         }
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
         presenter= PresenterAuth(this, getSharedPreferences(sharedPrefName,Context.MODE_PRIVATE))
+        presenter.init()
 
         Log.d("debug", "onCreate completed")
     }
 
-    override fun onResume() {
-        super.onResume()
-        presenter.init()
-        presenter.onActivityResume()
-        presenter.showUsers()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        presenter.onActivityPause()
-    }
 
     override fun showLogInError() {
         binding.edPasswordLayout.error=getString(R.string.logInError)
