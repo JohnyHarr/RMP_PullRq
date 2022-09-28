@@ -12,7 +12,6 @@ import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
 import io.realm.kotlin.mongodb.exceptions.UserAlreadyExistsException
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
-import io.realm.kotlin.query.RealmResults
 
 
 class UserModel: UserModelInterface {
@@ -63,16 +62,16 @@ class UserModel: UserModelInterface {
         realmUserDB.close()
     }
 
-
-
-    override fun deleteUsers() {
-        realmUserDB.writeBlocking {
-            // fetch all users from the realm
-            val users: RealmResults<RealmUserData> = this.query<RealmUserData>().find()
-            // call delete on the results of a query to delete those objects permanently
-            delete(users)
+    override fun logOut() {
+        runBlocking {
+            realmUserCfg.user.logOut()
         }
-        //Realm.deleteRealm(realmUserCfg)//USE IF YOU NEED TO REWRITE User class
+        realmUserDB.close()
     }
 
+    override fun updateData(user: RealmUserData) {
+        realmUserDB.writeBlocking {
+            copyToRealm(user)
+        }
+    }
 }

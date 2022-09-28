@@ -6,6 +6,7 @@ import com.example.myapplication.Consts.password_min_len
 import com.example.myapplication.SharedPrefsIDs.isLogged
 import com.example.myapplication.SharedPrefsIDs.loggedUserLogin
 import com.example.myapplication.SharedPrefsIDs.loggedUserPassword
+import java.io.Serializable
 
 
 class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPreferences) {
@@ -15,7 +16,8 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
        // model= UserModel()
      //   model.init()
         if(sharedPref.getBoolean(isLogged, false)) {
-            if(tryLogInAction(sharedPref.getString(loggedUserLogin, "empty")!!, sharedPref.getString(loggedUserPassword, "empty")!!))
+            if(tryLogInAction(sharedPref.getString(loggedUserLogin, "empty")!!, sharedPref.getString(
+                    loggedUserPassword, "empty")!!))
                 view.enterAnotherScreen()
             else
                 sharedPref.edit(commit = true){
@@ -52,6 +54,7 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
             putString(loggedUserLogin, _login)
             putString(loggedUserPassword, _password)
         }
+
         return true
     }
 
@@ -62,17 +65,13 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
             view.showLoginExistError()
             return false
         }
+        model?.updateData(RealmUserData(_login, _password, _firstName, _lastName))
         return true
     }
 
-
-    fun deleteUsers(){
-        model?.deleteUsers()
-       sharedPref.edit(commit = true){
-           putBoolean(isLogged, false)
-           putString(loggedUserLogin,"")
-           putString(loggedUserPassword,"")
-       }
+    fun deInit(){
+        model?.closeRealm()
     }
+
 
 }

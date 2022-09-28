@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivityMainBinding
+import io.realm.kotlin.internal.platform.runBlocking
 
 
 open class MainActivity : AppCompatActivity(),AuthView{
@@ -18,8 +19,8 @@ open class MainActivity : AppCompatActivity(),AuthView{
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter= PresenterAuth(this, getSharedPreferences(sharedPrefName,Context.MODE_PRIVATE))
-        presenter.init()//initializing presenter
+          presenter = PresenterAuth(this, getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE))
+          presenter.init()//initializing presenter
         binding.logInButton.setOnClickListener {//making error messages gone if they were visible
             turnOffAllErrors()
             presenter.tryLogInAction(binding.edLoginLayout.editText!!.text.toString().trim(),binding.edPasswordLayout.editText!!.text.toString().trim())//LogIn call
@@ -65,15 +66,15 @@ open class MainActivity : AppCompatActivity(),AuthView{
 
     private fun enterSignUpScreen(){
         val intent=Intent(this,ActivitySignUp::class.java)
-       // intent.putExtra("PRESENTER", presenter)
+       //
         startActivity(intent)
     }
 
     override fun enterAnotherScreen() {
-        //!!!!!TEMP(there is no need to delete users. It's used for debugging)!!!!!
-        //presenter.deleteUsers()
+
         val intent=Intent(this,CatalogActivity::class.java)
         startActivity(intent)
+        presenter.deInit()
         finish()
     }
 
