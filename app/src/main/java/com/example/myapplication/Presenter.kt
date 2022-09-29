@@ -6,6 +6,7 @@ import com.example.myapplication.Consts.password_min_len
 import com.example.myapplication.SharedPrefsIDs.isLogged
 import com.example.myapplication.SharedPrefsIDs.loggedUserLogin
 import com.example.myapplication.SharedPrefsIDs.loggedUserPassword
+import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
 
 
@@ -13,19 +14,9 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
     private var model: UserModel?=null
 
     fun init(){
-       // model= UserModel()
-     //   model.init()
         if(sharedPref.getBoolean(isLogged, false)) {
-            if(tryLogInAction(sharedPref.getString(loggedUserLogin, "empty")!!, sharedPref.getString(
-                    loggedUserPassword, "empty")!!))
                 view.enterAnotherScreen()
-          /*  else
-                sharedPref.edit(commit = true){
-                    putBoolean(isLogged, false)
-                }*/
-
         }
-        //model.closeRealm()
     }
 
     private fun checkLoginPasswordIsEmpty(_login: String, _password: String):Boolean{
@@ -41,14 +32,25 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
         return checkError
     }
 
+    private fun saveUserPrefs(_login: String, _password: String){
+        sharedPref.edit(commit = true){
+            putBoolean(isLogged, true)
+            putString(loggedUserLogin, _login)
+            putString(loggedUserPassword, _password)
+        }
+    }
+
     fun tryLogInAction(_login:String, _password:String): Boolean{
         try {
             if (checkLoginPasswordIsEmpty(_login, _password)) return false
             model = UserModel()
-            if (model?.logIn(_login, _password) == false) {
-                view.showLogInError()
-                return false
-            }
+            model?.logIn(_login, _password)
+
+
+        }
+        catch (exc: AuthException){
+            view.showLogInError()
+            return false
         }
         catch (exc: IllegalArgumentException){
             view.showToastInternalRealmError()
@@ -63,12 +65,7 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
             return false
         }
         view.enterAnotherScreen()
-        sharedPref.edit(commit = true){
-            putBoolean(isLogged, true)
-            putString(loggedUserLogin, _login)
-            putString(loggedUserPassword, _password)
-        }
-
+        saveUserPrefs(_login,_password)
         return true
     }
 

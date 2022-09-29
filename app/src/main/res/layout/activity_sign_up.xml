@@ -19,16 +19,16 @@
         app:layout_constraintVertical_bias="0.772" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/edLoginLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:hint="@string/auth_login_hint"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
         app:boxBackgroundColor="#00FFFFFF"
-        app:errorEnabled="false"
+        app:boxStrokeErrorColor="@color/design_default_color_error"
+        app:errorEnabled="true"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,27 +41,27 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#757575"
             android:inputType="textEmailAddress"
+            android:textColorHint="#757575"
             tools:ignore="TextContrastCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/edPasswordLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:hint="@string/auth_password_hint"
         app:boxBackgroundColor="#00FFFFFF"
-        app:errorEnabled="false"
+        app:boxStrokeErrorColor="@color/design_default_color_error"
+        app:errorEnabled="true"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="@+id/edLoginLayout"
         app:layout_constraintStart_toStartOf="@+id/edLoginLayout"
         app:layout_constraintTop_toBottomOf="@+id/edLoginLayout"
-        app:passwordToggleEnabled="true"
-        app:boxStrokeErrorColor="@color/design_default_color_error">
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -71,20 +71,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/edFirstnameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:hint="@string/auth_firstname_hint"
         app:boxBackgroundColor="#00FFFFFF"
-        app:errorEnabled="false"
+        app:boxStrokeErrorColor="@color/design_default_color_error"
+        app:errorEnabled="true"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="@+id/edLoginLayout"
         app:layout_constraintStart_toStartOf="@+id/edLoginLayout"
-        app:layout_constraintTop_toBottomOf="@+id/edPasswordLayout"
-        app:boxStrokeErrorColor="@color/design_default_color_error">
+        app:layout_constraintTop_toBottomOf="@+id/edPasswordLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -95,21 +95,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/edLastnameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:hint="@string/auth_lastname_hint"
         app:boxBackgroundColor="#00FFFFFF"
-        app:errorEnabled="false"
+        app:boxStrokeErrorColor="@color/design_default_color_error"
+        app:errorEnabled="true"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="@+id/edLoginLayout"
         app:layout_constraintStart_toStartOf="@+id/edLoginLayout"
         app:layout_constraintTop_toBottomOf="@+id/edFirstnameLayout"
-        app:passwordToggleEnabled="false"
-        app:boxStrokeErrorColor="@color/design_default_color_error">
+        app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

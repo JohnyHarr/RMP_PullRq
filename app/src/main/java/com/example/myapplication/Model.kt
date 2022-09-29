@@ -20,7 +20,7 @@ class UserModel: UserModelInterface {
     private lateinit var realmUserDB: Realm
     private val app=App.create(app_id)
 
-    override fun logIn(_login: String, _password: String): Boolean  {
+    override fun logIn(_login: String, _password: String) :Boolean {
         try {
 
             runBlocking {
@@ -40,7 +40,7 @@ class UserModel: UserModelInterface {
             }
             realmUserDB=Realm.open(realmUserCfg)
         }
-        catch (exc: AuthException){return false}
+        catch (exc: AuthException){throw exc}
         catch (exc: IllegalArgumentException){throw exc}
         catch (exc: IllegalStateException){throw exc}
         catch (exc: ServiceException) {Log.d("debug", "3"); throw exc }

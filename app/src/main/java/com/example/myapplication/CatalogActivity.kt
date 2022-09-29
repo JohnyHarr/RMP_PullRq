@@ -3,10 +3,11 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityCatalogBinding
 
-class CatalogActivity : AppCompatActivity() {
+class CatalogActivity : AppCompatActivity(), IToastRealmSessionErrors {
     private lateinit var binding: ActivityCatalogBinding
     private lateinit var  presenterCatalog: PresenterCatalog
 
@@ -20,11 +21,27 @@ class CatalogActivity : AppCompatActivity() {
         binding.logOutBut.setOnClickListener{
             Log.d("debug", "Start logout")
             presenterCatalog.logOut()
-            val intent= Intent(this, MainActivity::class.java)
-            finish()
-            startActivity(intent)
+            returnToLoginScreen()
         }
-        presenterCatalog.check()
         Log.d("debug", "onCreateCatalog completed")
+    }
+
+    fun returnToLoginScreen(){
+        val intent= Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+
+    }
+
+    override fun showToastUnableToLogIN(){
+        Toast.makeText(this, getString(R.string.logInErrorConnectionIssue), Toast.LENGTH_LONG).show()
+    }
+
+    override fun showToastInternalRealmError() {
+        Toast.makeText(this, getString(R.string.unknownRealmError), Toast.LENGTH_LONG).show()
+    }
+
+    fun showToastUserStoppedOrDeleted() {
+        Toast.makeText(this, getString(R.string.unknownRealmError), Toast.LENGTH_LONG).show()
     }
 }
