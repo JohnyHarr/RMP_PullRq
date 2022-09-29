@@ -23,13 +23,11 @@ open class MainActivity : AppCompatActivity(),AuthView{
           presenter = PresenterAuth(this, getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE))
           presenter.init()//initializing presenter
         binding.logInButton.setOnClickListener {//making error messages gone if they were visible
-
+            turnOffAllErrors()
                 presenter.tryLogInAction(
                     binding.edLoginLayout.editText!!.text.toString().trim(),
                     binding.edPasswordLayout.editText!!.text.toString().trim()
                 )//LogIn cal
-
-            turnOffAllErrors()
             Log.d("debug", "name=${binding.edLoginLayout.editText!!.text.toString().trim()}/${binding.edPasswordLayout.editText!!.text.toString().trim()}")
         }
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
@@ -54,6 +52,7 @@ open class MainActivity : AppCompatActivity(),AuthView{
     override fun showLogInError() {
         binding.edPasswordLayout.error=getString(R.string.logInError)
         binding.edPasswordLayout.isErrorEnabled=true
+
     }
 
     override fun showLoginExistError() {
@@ -64,6 +63,7 @@ open class MainActivity : AppCompatActivity(),AuthView{
     override fun showLoginEmptyError() {
         binding.edLoginLayout.error=getString(R.string.loginEmpty)
         binding.edLoginLayout.isErrorEnabled=true
+        Log.d("debug", "WTF")
 
     }
 

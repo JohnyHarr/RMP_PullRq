@@ -21,22 +21,23 @@ class PresenterCatalog(private var view: CatalogActivity,private val sharedPref:
             )
         }
         catch (exc: AuthException){
+            clearPrefs()
             view.returnToLoginScreen()
             view.showToastUserStoppedOrDeleted()
         }
         catch (exc: IllegalArgumentException){
+            clearPrefs()
             view.showToastInternalRealmError()
             view.returnToLoginScreen()
         }
         catch (exc: IllegalStateException){
+            clearPrefs()
             view.showToastInternalRealmError()
             view.returnToLoginScreen()
         }
         catch (exc: ServiceException){
+            clearPrefs()
             Log.d("input" ,"!!!LogIn interrupt")
-            sharedPref.edit(commit = true){
-                putBoolean(isLogged,false)
-            }
             view.showToastUnableToLogIN()
             view.returnToLoginScreen()
         }
@@ -46,6 +47,12 @@ class PresenterCatalog(private var view: CatalogActivity,private val sharedPref:
         val result=model.check()
         for (i in result.indices)
             Log.d("debug", "Data: ${result[i]._id}")
+    }
+
+    private fun clearPrefs(){
+        sharedPref.edit(commit = true){
+            putBoolean(isLogged, false)
+        }
     }
 
 
