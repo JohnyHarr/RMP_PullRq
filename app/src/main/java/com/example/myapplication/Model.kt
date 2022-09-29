@@ -2,7 +2,7 @@ package com.example.myapplication
 
 import android.util.Log
 import com.example.myapplication.Consts.app_id
-import com.example.myapplication.Consts.db_filename
+import com.example.myapplication.Consts.db_sub_name
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.internal.platform.runBlocking
@@ -12,6 +12,7 @@ import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
 import io.realm.kotlin.mongodb.exceptions.UserAlreadyExistsException
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
+import io.realm.kotlin.query.RealmResults
 
 
 class UserModel: UserModelInterface {
@@ -19,24 +20,31 @@ class UserModel: UserModelInterface {
     private lateinit var realmUserDB: Realm
     private val app=App.create(app_id)
 
-    override fun logIn(_login: String, _password: String): Boolean {
+    override fun logIn(_login: String, _password: String): Boolean  {
         try {
+
             runBlocking {
-                try {
+
+                    Log.d("debug", "trying to log in")
                     val user = app.login(Credentials.emailPassword(_login, _password))
+                    Log.d("debug", "logged in")
                     realmUserCfg = SyncConfiguration.Builder(user, setOf(RealmUserData::class))
                         .initialSubscriptions { realmUserDB ->
                             add(
                                 realmUserDB.query<RealmUserData>("_id=$0", _login),
-                                db_filename
+                                db_sub_name
                             )
                         }.build()
-                }
-                catch (exc: AuthException) { throw exc }
+
+
             }
+            realmUserDB=Realm.open(realmUserCfg)
         }
         catch (exc: AuthException){return false}
-        realmUserDB=Realm.open(realmUserCfg)
+        catch (exc: IllegalArgumentException){throw exc}
+        catch (exc: IllegalStateException){throw exc}
+        catch (exc: ServiceException) {Log.d("debug", "3"); throw exc }
+
         return true
     }
 
@@ -52,8 +60,9 @@ class UserModel: UserModelInterface {
             return false
         }
         catch (exc: ServiceException){
+
             Log.e("debug", "Some error occurred")
-            return false
+            throw exc
         }
         return logIn(user._id, user.password)
     }
@@ -69,9 +78,13 @@ class UserModel: UserModelInterface {
         realmUserDB.close()
     }
 
-    override fun updateData(user: RealmUserData) {
-        realmUserDB.writeBlocking {
+    override suspend fun updateData(user: RealmUserData) {
+        realmUserDB.write{
             copyToRealm(user)
         }
+    }
+
+    override fun check(): RealmResults<RealmUserData> {
+        return realmUserDB.query<RealmUserData>().find()
     }
 }

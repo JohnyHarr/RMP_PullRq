@@ -5,9 +5,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivitySignUpBinding
+import kotlinx.coroutines.runBlocking
 
 
 class ActivitySignUp : AppCompatActivity(), AuthView{
@@ -19,12 +21,18 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
         binding=ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.buttonSignUp.setOnClickListener{
+
             turnOffAllErrors()
-            if (presenter.createUser(binding.edLoginLayout.editText?.text.toString().trim(),
-                    binding.edPasswordLayout.editText?.text.toString().trim(),
-                    binding.edFirstnameLayout.editText?.text.toString().trim(),
-                    binding.edLastnameLayout.editText?.text.toString().trim()))
+            runBlocking {
+                if (presenter.createUser(
+                        binding.edLoginLayout.editText?.text.toString().trim(),
+                        binding.edPasswordLayout.editText?.text.toString().trim(),
+                        binding.edFirstnameLayout.editText?.text.toString().trim(),
+                        binding.edLastnameLayout.editText?.text.toString().trim()
+                    )
+                )
                 finish()
+            }
 
         }
         binding.edLoginLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
@@ -35,6 +43,13 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
         Log.d("debug", "onCreate completed")
     }
 
+    override fun showToastUnableToLogIN() {
+        Toast.makeText(this,getString(R.string.logInErrorConnectionIssue), Toast.LENGTH_LONG).show()
+    }
+
+    override fun showToastInternalRealmError() {
+        Toast.makeText(this, getString(R.string.unknownRealmError),Toast.LENGTH_LONG).show()
+    }
 
     override fun showLogInError() {
         binding.edPasswordLayout.error=getString(R.string.logInError)

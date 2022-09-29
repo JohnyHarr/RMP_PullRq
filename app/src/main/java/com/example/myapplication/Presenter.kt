@@ -6,7 +6,7 @@ import com.example.myapplication.Consts.password_min_len
 import com.example.myapplication.SharedPrefsIDs.isLogged
 import com.example.myapplication.SharedPrefsIDs.loggedUserLogin
 import com.example.myapplication.SharedPrefsIDs.loggedUserPassword
-import java.io.Serializable
+import io.realm.kotlin.mongodb.exceptions.ServiceException
 
 
 class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPreferences) {
@@ -19,10 +19,10 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
             if(tryLogInAction(sharedPref.getString(loggedUserLogin, "empty")!!, sharedPref.getString(
                     loggedUserPassword, "empty")!!))
                 view.enterAnotherScreen()
-            else
+          /*  else
                 sharedPref.edit(commit = true){
                     putBoolean(isLogged, false)
-                }
+                }*/
 
         }
         //model.closeRealm()
@@ -42,10 +42,24 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
     }
 
     fun tryLogInAction(_login:String, _password:String): Boolean{
-        if(checkLoginPasswordIsEmpty(_login,_password)) return false
-        model= UserModel()
-        if(model?.logIn(_login,_password)==false) {
-            view.showLogInError()
+        try {
+            if (checkLoginPasswordIsEmpty(_login, _password)) return false
+            model = UserModel()
+            if (model?.logIn(_login, _password) == false) {
+                view.showLogInError()
+                return false
+            }
+        }
+        catch (exc: IllegalArgumentException){
+            view.showToastInternalRealmError()
+            return false
+        }
+        catch (exc: IllegalStateException){
+            view.showToastInternalRealmError()
+            return false
+        }
+        catch (exc: ServiceException){
+            view.showToastUnableToLogIN()
             return false
         }
         view.enterAnotherScreen()
@@ -58,16 +72,23 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
         return true
     }
 
-    fun createUser(_login: String, _password: String, _firstName:String, _lastName: String): Boolean{
+    suspend fun createUser(_login: String, _password: String, _firstName:String, _lastName: String): Boolean{
         if(checkLoginPasswordIsEmpty(_login,_password)) return false
         model= UserModel()
-        if(model?.signUp(RealmUserData(_login, _password, _firstName, _lastName))!=true){
-            view.showLoginExistError()
-            return false
+        try {
+            if (model?.signUp(RealmUserData(_login, _password, _firstName, _lastName)) != true) {
+                view.showLoginExistError()
+                return false
+            }
         }
-        model?.updateData(RealmUserData(_login, _password, _firstName, _lastName))
+        catch (err: ServiceException){
+            view.showToastUnableToLogIN()
+        }
+            model?.updateData(RealmUserData(_login, _password, _firstName, _lastName))
         return true
     }
+
+
 
     fun deInit(){
         model?.closeRealm()

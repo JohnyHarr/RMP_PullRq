@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,11 +20,11 @@ class CatalogActivity : AppCompatActivity() {
         binding.logOutBut.setOnClickListener{
             Log.d("debug", "Start logout")
             presenterCatalog.logOut()
-            intent= Intent(this, MainActivity::class.java)
+            val intent= Intent(this, MainActivity::class.java)
             finish()
             startActivity(intent)
-
         }
+        presenterCatalog.check()
         Log.d("debug", "onCreateCatalog completed")
     }
 }

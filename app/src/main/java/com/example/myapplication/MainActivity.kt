@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivityMainBinding
@@ -22,8 +23,13 @@ open class MainActivity : AppCompatActivity(),AuthView{
           presenter = PresenterAuth(this, getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE))
           presenter.init()//initializing presenter
         binding.logInButton.setOnClickListener {//making error messages gone if they were visible
+
+                presenter.tryLogInAction(
+                    binding.edLoginLayout.editText!!.text.toString().trim(),
+                    binding.edPasswordLayout.editText!!.text.toString().trim()
+                )//LogIn cal
+
             turnOffAllErrors()
-            presenter.tryLogInAction(binding.edLoginLayout.editText!!.text.toString().trim(),binding.edPasswordLayout.editText!!.text.toString().trim())//LogIn call
             Log.d("debug", "name=${binding.edLoginLayout.editText!!.text.toString().trim()}/${binding.edPasswordLayout.editText!!.text.toString().trim()}")
         }
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
@@ -37,6 +43,13 @@ open class MainActivity : AppCompatActivity(),AuthView{
         Log.d("debug", "onCreate completed")
     }
 
+    override fun showToastUnableToLogIN(){
+        Toast.makeText(this, getString(R.string.logInErrorConnectionIssue),Toast.LENGTH_LONG).show()
+    }
+
+    override fun showToastInternalRealmError() {
+        Toast.makeText(this, getString(R.string.unknownRealmError),Toast.LENGTH_LONG).show()
+    }
 
     override fun showLogInError() {
         binding.edPasswordLayout.error=getString(R.string.logInError)

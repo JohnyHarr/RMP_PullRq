@@ -11,7 +11,9 @@
     <string name="auth_lastname_hint">Lastname</string>
     <string name="pass_visibility">password visibility</string>
     <string name="loginEmpty">Login cannot be empty</string>
-    <string name="loginAlreadyExists">Login already exists or some error occurred</string>
+    <string name="loginAlreadyExists">Login already exists</string>
     <string name="logInError">Incorrect login or password</string>
+    <string name="logInErrorConnectionIssue">Seems like you have connection issues</string>
+    <string name="unknownRealmError">Seems like we\'re having problems with DB</string>
     <string name="passwordEmpty">Password minimal length is 6</string>
 </resources>
