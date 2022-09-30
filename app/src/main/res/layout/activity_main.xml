@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/MainConstruct"
+    android:background="@color/bg_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="@string/auth_button"
-            app:backgroundTint="@color/dark_blue"
+            android:textColor="@color/text_color_but"
             app:cornerRadius="30dp" />
 
         <Button
@@ -36,10 +37,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="@string/sign_up_button"
-            android:textColor="@color/dark_blue"
-            app:backgroundTint="#FFFFFF"
+            android:textColor="@color/buttons_color"
+            app:backgroundTint="@color/alpha_0"
+            app:backgroundTintMode="multiply"
             app:cornerRadius="30dp"
-            app:strokeColor="@color/dark_blue"
+            app:strokeColor="@color/buttons_color"
             app:strokeWidth="2dp" />
 
         <TextView
@@ -49,67 +51,52 @@
             android:layout_weight="0"
             android:gravity="center"
             android:text="@string/greet"
-            android:textColor="@color/dark_blue"
+            android:textColor="#BEFFFFFF"
             android:textSize="16sp" />
+
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edLoginLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/CustomOutlineBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/auth_login_hint"
-        app:boxBackgroundColor="#00FFFFFF"
-        app:boxStrokeColor="@color/dark_blue"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
-        app:errorEnabled="false"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/dark_blue"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:passwordToggleEnabled="false"
-        app:passwordToggleTint="@color/dark_blue">
+        app:passwordToggleTint="@color/buttons_color">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:textColorHint="@color/dark_blue"
+            android:textColorHint="@color/text_color"
             tools:ignore="TextContrastCheck,TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edPasswordLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/CustomOutlineBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="50dp"
         android:hint="@string/auth_password_hint"
-        app:boxBackgroundColor="#00FFFFFF"
-        app:boxStrokeColor="@color/dark_blue"
-        app:boxStrokeErrorColor="@color/design_default_color_error"
-        app:errorEnabled="false"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/dark_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edLoginLayout"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/dark_blue">
-
+        app:passwordToggleTint="@color/buttons_color">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:textColorHint="@color/dark_blue"
+            android:textColorHint="@color/text_color"
             tools:ignore="TextContrastCheck,TextContrastCheck" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -120,7 +107,7 @@
         android:layout_marginEnd="50dp"
         android:gravity="center"
         android:text="@string/greet"
-        android:textColor="@color/dark_blue"
+        android:textColor="#BEFFFFFF"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

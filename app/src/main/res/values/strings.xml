@@ -2,19 +2,19 @@
     <string name="app_name">Store</string>
     <string name="greet">We\'re glad to see you</string>
     <string name="auth_button">Sign In</string>
-    <string name="alternative_logIns">Or sign in with google</string>
-    <string name="sign_up_button">Create New Account</string>
+    <string name="sign_up_button">Sign Up</string>
     <string name="sign_up_button_text">I\'m new user</string>
     <string name="auth_login_hint">Login</string>
     <string name="auth_password_hint">Password</string>
     <string name="auth_firstname_hint">Firstname</string>
     <string name="auth_lastname_hint">Lastname</string>
     <string name="pass_visibility">password visibility</string>
-    <string name="loginEmpty">Login cannot be empty</string>
+    <string name="loginEmpty">Login must be at least 6 characters long</string>
+    <string name="passwordEmpty">Password must be at least 6 characters long</string>
     <string name="loginAlreadyExists">Login already exists</string>
     <string name="logInError">Incorrect login or password</string>
     <string name="logInErrorConnectionIssue">Seems like you have connection issues</string>
+    <string name="userStoppedOrDeleted">Seems like your account was stopped</string>
     <string name="unknownRealmError">Seems like we\'re having problems with DB</string>
-    <string name="userStoppedOrDeleted">Your account was stopped or deleted</string>
-    <string name="passwordEmpty">Password minimal length is 6</string>
+
 </resources>

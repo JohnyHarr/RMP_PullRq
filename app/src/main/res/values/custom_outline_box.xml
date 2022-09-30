@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomOutlineBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">@color/alpha_0</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+       <item name="boxCornerRadiusTopStart">10dp</item>
+
+        <item name="boxStrokeColor">@color/buttons_color</item>
+        <item name="boxStrokeErrorColor">@color/design_default_color_error</item>
+        <item name="errorEnabled">false</item>
+        <item name="errorIconTint">@color/design_default_color_error</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintTextColor">@color/buttons_color</item>
+    </style>
+</resources>
