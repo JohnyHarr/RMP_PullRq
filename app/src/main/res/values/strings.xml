@@ -15,5 +15,6 @@
     <string name="logInError">Incorrect login or password</string>
     <string name="logInErrorConnectionIssue">Seems like you have connection issues</string>
     <string name="unknownRealmError">Seems like we\'re having problems with DB</string>
+    <string name="userStoppedOrDeleted">Your account was stopped or deleted</string>
     <string name="passwordEmpty">Password minimal length is 6</string>
 </resources>

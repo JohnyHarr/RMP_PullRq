@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import com.example.myapplication.Consts.login_min_len
 import com.example.myapplication.Consts.password_min_len
 import com.example.myapplication.SharedPrefsIDs.isLogged
 import com.example.myapplication.SharedPrefsIDs.loggedUserLogin
@@ -21,7 +22,7 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
 
     private fun checkLoginPasswordIsEmpty(_login: String, _password: String):Boolean{
         var checkError =false
-        if(_login.isEmpty()) {
+        if(_login.length<login_min_len) {
             view.showLoginEmptyError()
             checkError=true
         }

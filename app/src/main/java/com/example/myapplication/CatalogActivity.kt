@@ -42,6 +42,6 @@ class CatalogActivity : AppCompatActivity(), IToastRealmSessionErrors {
     }
 
     fun showToastUserStoppedOrDeleted() {
-        Toast.makeText(this, getString(R.string.unknownRealmError), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.userStoppedOrDeleted), Toast.LENGTH_LONG).show()
     }
 }
