@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Store</string>
-    <string name="greet">Hello World</string>
-    <string name="greet_if_logged">Hello</string>
+    <string name="greet">We\'re glad to see you</string>
     <string name="auth_button">Sign In</string>
-    <string name="sign_up_button">Sign Up</string>
+    <string name="alternative_logIns">Or sign in with google</string>
+    <string name="sign_up_button">Create New Account</string>
     <string name="sign_up_button_text">I\'m new user</string>
     <string name="auth_login_hint">Login</string>
     <string name="auth_password_hint">Password</string>

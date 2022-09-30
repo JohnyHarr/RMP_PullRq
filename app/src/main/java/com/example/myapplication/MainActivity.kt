@@ -35,9 +35,6 @@ open class MainActivity : AppCompatActivity(),AuthView{
         binding.buttonSignUp.setOnClickListener{//sending user onto SignUp screen if user wants to sign up
             enterSignUpScreen()
         }
-        binding.registrationKey.setOnClickListener{
-            enterSignUpScreen()
-        }
         Log.d("debug", "onCreate completed")
     }
 
