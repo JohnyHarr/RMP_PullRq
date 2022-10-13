@@ -38,7 +38,7 @@
             android:layout_weight="0"
             android:text="@string/sign_up_button"
             android:textColor="@color/buttons_color"
-            app:backgroundTint="@color/alpha_0"
+            app:backgroundTint="#00B5B5B5"
             app:backgroundTintMode="multiply"
             app:cornerRadius="30dp"
             app:strokeColor="@color/buttons_color"
