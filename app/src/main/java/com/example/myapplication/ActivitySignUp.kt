@@ -2,9 +2,12 @@ package com.example.myapplication
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.SharedPrefsIDs.sharedPrefName
@@ -43,6 +46,23 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
         Log.d("debug", "onCreate completed")
     }
 
+  /*  override fun Activity.hideKeyboard() {
+        hideKeyboard()
+    }*/
+
+    override fun showPasswordToggle() {
+        binding.edPasswordLayout.isPasswordVisibilityToggleEnabled = binding.edPasswordLayout.editText!!.text.isNotEmpty()
+    }
+
+    override fun hideKeyboard(){
+        val view=this.currentFocus
+        if (view!=null){
+            val toHide=getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            toHide.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
     override fun showToastUnableToLogIN() {
         Toast.makeText(this,getString(R.string.logInErrorConnectionIssue), Toast.LENGTH_LONG).show()
     }
@@ -61,14 +81,13 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
         binding.edLoginLayout.isErrorEnabled=true
     }
 
-    override fun showLoginEmptyError() {
-        binding.edLoginLayout.error=getString(R.string.loginEmpty)
+    override fun showLoginInvalidFormat() {
+        binding.edLoginLayout.error=getString(R.string.loginInvalidFormat)
         binding.edLoginLayout.isErrorEnabled=true
-
     }
 
-    override fun showPasswordEmptyError() {
-        binding.edPasswordLayout.error=getString(R.string.passwordEmpty)
+    override fun showPasswordInvalidFormat() {
+        binding.edPasswordLayout.error=getString(R.string.passwordInvalidFormat)
         binding.edPasswordLayout.isErrorEnabled=true
     }
 

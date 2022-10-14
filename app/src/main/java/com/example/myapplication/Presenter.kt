@@ -20,14 +20,18 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
         }
     }
 
-    private fun checkLoginPasswordIsEmpty(_login: String, _password: String):Boolean{
+    private fun validateLoginPasswordFormat(_login: String, _password: String):Boolean{
         var checkError =false
-        if(_login.length<login_min_len) {
-            view.showLoginEmptyError()
+        if(_login.filter { it in 'A'..'Z' || it in 'a'..'z' || it in '0'..'9'}.length != _login.length
+            ||_login.none { it in 'A'..'Z' || it in 'a'..'z' }
+            ||_login.length<login_min_len){
             checkError=true
+            view.showLoginInvalidFormat()
         }
-        if(_password.length<password_min_len) {
-            view.showPasswordEmptyError()
+        if(_login.filter { it in 'A'..'Z' || it in 'a'..'z' || it in '0'..'9'}.length != _login.length
+            ||_login.none { it in 'A'..'Z' || it in 'a'..'z' }
+            ||_password.length< password_min_len){
+            view.showPasswordInvalidFormat()
             checkError=true
         }
         return checkError
@@ -43,7 +47,7 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
 
     fun tryLogInAction(_login:String, _password:String): Boolean{
         try {
-            if (checkLoginPasswordIsEmpty(_login, _password)) return false
+            if (validateLoginPasswordFormat(_login, _password)) return false
             model = UserModel()
             model?.logIn(_login, _password)
 
@@ -71,7 +75,7 @@ class PresenterAuth(private var view: AuthView,private val sharedPref: SharedPre
     }
 
     suspend fun createUser(_login: String, _password: String, _firstName:String, _lastName: String): Boolean{
-        if(checkLoginPasswordIsEmpty(_login,_password)) return false
+        if(validateLoginPasswordFormat(_login,_password)) return false
         model= UserModel()
         try {
             if (model?.signUp(RealmUserData(_login, _password, _firstName, _lastName)) != true) {

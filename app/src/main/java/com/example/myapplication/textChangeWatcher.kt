@@ -12,5 +12,6 @@ class TextChangeWatcher(private val view: AuthView):TextWatcher {
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         view.turnOffAllErrors()
+        view.showPasswordToggle()
     }
 }
