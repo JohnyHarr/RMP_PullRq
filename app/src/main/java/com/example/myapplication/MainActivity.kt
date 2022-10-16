@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -12,7 +13,7 @@ import com.example.myapplication.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity(),AuthView{
+class MainActivity : AppCompatActivity(),IAuthView{
     private lateinit var binding: ActivityMainBinding
     private lateinit var presenter: PresenterAuth
 
@@ -21,15 +22,13 @@ class MainActivity : AppCompatActivity(),AuthView{
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.edPasswordLayout.isPasswordVisibilityToggleEnabled=false
         presenter = PresenterAuth(this, getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE))
         presenter.init()//initializing presenter
         binding.logInButton.setOnClickListener {//making error messages gone if they were visible
             turnOffAllErrors()
-                presenter.tryLogInAction(
-                    binding.edLoginLayout.editText!!.text.toString().trim(),
-                    binding.edPasswordLayout.editText!!.text.toString().trim()
-                )//LogIn cal
+            presenter.tryLogInAction(
+                binding.edLoginLayout.editText!!.text.toString().trim(),
+                binding.edPasswordLayout.editText!!.text.toString().trim())//LogIn cal
             Log.d("debug", "name=${binding.edLoginLayout.editText!!.text.toString().trim()}/${binding.edPasswordLayout.editText!!.text.toString().trim()}")
         }
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
@@ -53,6 +52,14 @@ class MainActivity : AppCompatActivity(),AuthView{
        }
        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
    }
+
+    override fun showProgressBar() {
+        binding.progressBar.visibility= View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        binding.progressBar.visibility=View.GONE
+    }
 
     override fun showPasswordToggle() {
         binding.edPasswordLayout.isPasswordVisibilityToggleEnabled = binding.edPasswordLayout.editText!!.text.isNotEmpty()

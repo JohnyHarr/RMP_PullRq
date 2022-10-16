@@ -15,7 +15,7 @@ import io.realm.kotlin.mongodb.sync.SyncConfiguration
 import io.realm.kotlin.query.RealmResults
 
 
-class UserModel: UserModelInterface {
+class UserModel: IUserModel {
     private lateinit var realmUserCfg: SyncConfiguration
     private lateinit var realmUserDB: Realm
     private val app=App.create(app_id)

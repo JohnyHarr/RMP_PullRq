@@ -2,10 +2,11 @@ package com.example.myapplication
 
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -15,7 +16,7 @@ import com.example.myapplication.databinding.ActivitySignUpBinding
 import kotlinx.coroutines.runBlocking
 
 
-class ActivitySignUp : AppCompatActivity(), AuthView{
+class ActivitySignUp : AppCompatActivity(), IAuthView{
    private lateinit var binding: ActivitySignUpBinding
    private lateinit var presenter: PresenterAuth
     @SuppressLint("ClickableViewAccessibility")
@@ -24,7 +25,7 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
         binding=ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.buttonSignUp.setOnClickListener{
-
+            showProgressBar()
             turnOffAllErrors()
             runBlocking {
                 if (presenter.createUser(
@@ -36,7 +37,7 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
                 )
                 finish()
             }
-
+            hideProgressBar()
         }
         binding.edLoginLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
         binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
@@ -45,10 +46,6 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
 
         Log.d("debug", "onCreate completed")
     }
-
-  /*  override fun Activity.hideKeyboard() {
-        hideKeyboard()
-    }*/
 
     override fun showPasswordToggle() {
         binding.edPasswordLayout.isPasswordVisibilityToggleEnabled = binding.edPasswordLayout.editText!!.text.isNotEmpty()
@@ -61,6 +58,14 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
             toHide.hideSoftInputFromWindow(view.windowToken, 0)
         }
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
+    override fun showProgressBar() {
+        binding.progressBarSignUp.visibility= View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        binding.progressBarSignUp.visibility= View.GONE
     }
 
     override fun showToastUnableToLogIN() {
@@ -97,6 +102,10 @@ class ActivitySignUp : AppCompatActivity(), AuthView{
     }
 
     override fun enterAnotherScreen() {
+        val intent= Intent(this,CatalogActivity::class.java)
+        startActivity(intent)
+        presenter.deInit()
+        finish()
     }
 
 

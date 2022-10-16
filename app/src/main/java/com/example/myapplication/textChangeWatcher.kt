@@ -3,7 +3,7 @@ package com.example.myapplication
 import android.text.Editable
 import android.text.TextWatcher
 
-class TextChangeWatcher(private val view: AuthView):TextWatcher {
+class TextChangeWatcher(private val view: IAuthView):TextWatcher {
     override fun afterTextChanged(s: Editable?) {
     }
 
