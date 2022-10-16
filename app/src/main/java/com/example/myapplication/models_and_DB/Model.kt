@@ -18,7 +18,7 @@ import io.realm.kotlin.query.RealmResults
 
 class UserModel: IUserModel {
     private var realmUserCfg: SyncConfiguration?=null
-    private val realmUserDB by lazy { realmUserCfg?.let { Realm.open(it) }}
+    private val realmUserDB by lazy { realmUserCfg?.let { Realm.open(it) }}//
     private val app=App.create(app_id)
 
     override fun logIn(_login: String, _password: String) :Boolean {
