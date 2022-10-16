@@ -1,6 +1,6 @@
-package com.example.myapplication
+package com.example.myapplication.interfaces
 
-interface IAuthView: IToastRealmSessionErrors{
+interface IAuthView: IToastRealmSessionErrors {
     fun showLogInError()//show LogIn error if login or password are wrong
     fun showLoginInvalidFormat()
     fun showProgressBar()

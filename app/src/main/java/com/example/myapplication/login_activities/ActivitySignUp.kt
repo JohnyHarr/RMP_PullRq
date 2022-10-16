@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.login_activities
 
 
 import android.annotation.SuppressLint
@@ -11,18 +11,21 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.SharedPrefsIDs.sharedPrefName
+import com.example.myapplication.*
+import com.example.myapplication.objects.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivitySignUpBinding
+import com.example.myapplication.interfaces.IAuthView
 import kotlinx.coroutines.runBlocking
 
 
-class ActivitySignUp : AppCompatActivity(), IAuthView{
-   private lateinit var binding: ActivitySignUpBinding
-   private lateinit var presenter: PresenterAuth
+class ActivitySignUp : AppCompatActivity(), IAuthView {
+   private val binding by lazy{ActivitySignUpBinding.inflate(layoutInflater)}
+   private val presenter by lazy {
+       PresenterAuth(this, getSharedPreferences(sharedPrefName, MODE_PRIVATE)) }
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivitySignUpBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         binding.buttonSignUp.setOnClickListener{
             showProgressBar()
@@ -39,16 +42,16 @@ class ActivitySignUp : AppCompatActivity(), IAuthView{
             }
             hideProgressBar()
         }
-        binding.edLoginLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
-        binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
-        presenter= PresenterAuth(this, getSharedPreferences(sharedPrefName,Context.MODE_PRIVATE))
+        binding.edLoginLayout.editText?.addTextChangedListener(TextChangeWatcher(this))
+        binding.edPasswordLayout.editText?.addTextChangedListener(TextChangeWatcher(this))
         presenter.init()
 
         Log.d("debug", "onCreate completed")
     }
 
     override fun showPasswordToggle() {
-        binding.edPasswordLayout.isPasswordVisibilityToggleEnabled = binding.edPasswordLayout.editText!!.text.isNotEmpty()
+        binding.edPasswordLayout.isPasswordVisibilityToggleEnabled =
+            binding.edPasswordLayout.editText?.text?.isNotEmpty() ?: false
     }
 
     override fun hideKeyboard(){
@@ -77,23 +80,31 @@ class ActivitySignUp : AppCompatActivity(), IAuthView{
     }
 
     override fun showLogInError() {
-        binding.edPasswordLayout.error=getString(R.string.logInError)
-        binding.edPasswordLayout.isErrorEnabled=true
+        binding.edPasswordLayout.apply {
+            error = getString(R.string.logInError)
+            isErrorEnabled = true
+        }
     }
 
     override fun showLoginExistError() {
-        binding.edLoginLayout.error=getString(R.string.loginAlreadyExists)
-        binding.edLoginLayout.isErrorEnabled=true
+        binding.edLoginLayout.apply {
+            error = getString(R.string.loginAlreadyExists)
+            isErrorEnabled = true
+        }
     }
 
     override fun showLoginInvalidFormat() {
-        binding.edLoginLayout.error=getString(R.string.loginInvalidFormat)
-        binding.edLoginLayout.isErrorEnabled=true
+        binding.edLoginLayout.apply {
+            error = getString(R.string.loginInvalidFormat)
+            isErrorEnabled = true
+        }
     }
 
     override fun showPasswordInvalidFormat() {
-        binding.edPasswordLayout.error=getString(R.string.passwordInvalidFormat)
-        binding.edPasswordLayout.isErrorEnabled=true
+        binding.edPasswordLayout.apply {
+            error = getString(R.string.passwordInvalidFormat)
+            isErrorEnabled = true
+        }
     }
 
     override fun turnOffAllErrors(){
@@ -102,7 +113,7 @@ class ActivitySignUp : AppCompatActivity(), IAuthView{
     }
 
     override fun enterAnotherScreen() {
-        val intent= Intent(this,CatalogActivity::class.java)
+        val intent= Intent(this, CatalogActivity::class.java)
         startActivity(intent)
         presenter.deInit()
         finish()

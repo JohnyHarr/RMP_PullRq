@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.login_activities
 
 import android.content.Context
 import android.content.Intent
@@ -9,30 +9,33 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.SharedPrefsIDs.sharedPrefName
+import com.example.myapplication.*
+import com.example.myapplication.objects.SharedPrefsIDs.sharedPrefName
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.interfaces.IAuthView
 
 
-class MainActivity : AppCompatActivity(),IAuthView{
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var presenter: PresenterAuth
+class MainActivity : AppCompatActivity(), IAuthView {
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val presenter by lazy {
+        PresenterAuth(this, getSharedPreferences(sharedPrefName, MODE_PRIVATE))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        binding=ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
-        presenter = PresenterAuth(this, getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE))
         presenter.init()//initializing presenter
         binding.logInButton.setOnClickListener {//making error messages gone if they were visible
             turnOffAllErrors()
             presenter.tryLogInAction(
-                binding.edLoginLayout.editText!!.text.toString().trim(),
-                binding.edPasswordLayout.editText!!.text.toString().trim())//LogIn cal
-            Log.d("debug", "name=${binding.edLoginLayout.editText!!.text.toString().trim()}/${binding.edPasswordLayout.editText!!.text.toString().trim()}")
+                binding.edLoginLayout.editText?.text.toString().trim(),
+                binding.edPasswordLayout.editText?.text.toString().trim())//LogIn cal
+            Log.d("debug", "name=${binding.edLoginLayout.editText?.text.toString().trim()}/${binding.edPasswordLayout.editText?.text.toString().trim()}")
         }
-        binding.edPasswordLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
-        binding.edLoginLayout.editText!!.addTextChangedListener(TextChangeWatcher(this))
+        binding.edPasswordLayout.editText?.addTextChangedListener(TextChangeWatcher(this))
+        binding.edLoginLayout.editText?.addTextChangedListener(TextChangeWatcher(this))
         binding.buttonSignUp.setOnClickListener{//sending user onto SignUp screen if user wants to sign up
             enterSignUpScreen()
         }
@@ -62,7 +65,8 @@ class MainActivity : AppCompatActivity(),IAuthView{
     }
 
     override fun showPasswordToggle() {
-        binding.edPasswordLayout.isPasswordVisibilityToggleEnabled = binding.edPasswordLayout.editText!!.text.isNotEmpty()
+        binding.edPasswordLayout.isPasswordVisibilityToggleEnabled =
+            binding.edPasswordLayout.editText?.text?.isNotEmpty() ?: false
     }
 
     override fun showToastUnableToLogIN(){
@@ -73,24 +77,32 @@ class MainActivity : AppCompatActivity(),IAuthView{
         Toast.makeText(this, getString(R.string.unknownRealmError),Toast.LENGTH_LONG).show()
     }
 
-    override fun showLoginInvalidFormat() {
-        binding.edLoginLayout.error=getString(R.string.loginInvalidFormat)
-        binding.edLoginLayout.isErrorEnabled=true
-    }
-
-    override fun showPasswordInvalidFormat() {
-        binding.edPasswordLayout.error=getString(R.string.passwordInvalidFormat)
-        binding.edPasswordLayout.isErrorEnabled=true
-    }
-
     override fun showLogInError() {
-        binding.edPasswordLayout.error=getString(R.string.logInError)
-        binding.edPasswordLayout.isErrorEnabled=true
+        binding.edPasswordLayout.apply {
+            error = getString(R.string.logInError)
+            isErrorEnabled = true
+        }
     }
 
     override fun showLoginExistError() {
-        binding.edLoginLayout.error=getString(R.string.loginAlreadyExists)
-        binding.edLoginLayout.isErrorEnabled=true
+        binding.edLoginLayout.apply {
+            error = getString(R.string.loginAlreadyExists)
+            isErrorEnabled = true
+        }
+    }
+
+    override fun showLoginInvalidFormat() {
+        binding.edLoginLayout.apply {
+            error = getString(R.string.loginInvalidFormat)
+            isErrorEnabled = true
+        }
+    }
+
+    override fun showPasswordInvalidFormat() {
+        binding.edPasswordLayout.apply {
+            error = getString(R.string.passwordInvalidFormat)
+            isErrorEnabled = true
+        }
     }
 
     override fun turnOffAllErrors(){
@@ -99,14 +111,14 @@ class MainActivity : AppCompatActivity(),IAuthView{
     }
 
     private fun enterSignUpScreen(){
-        val intent=Intent(this,ActivitySignUp::class.java)
+        val intent=Intent(this, ActivitySignUp::class.java)
        //
         startActivity(intent)
     }
 
     override fun enterAnotherScreen() {
 
-        val intent=Intent(this,CatalogActivity::class.java)
+        val intent=Intent(this, CatalogActivity::class.java)
         startActivity(intent)
         presenter.deInit()
         finish()

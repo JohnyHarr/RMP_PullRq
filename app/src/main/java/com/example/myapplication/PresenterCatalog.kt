@@ -3,7 +3,8 @@ package com.example.myapplication
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.content.edit
-import com.example.myapplication.SharedPrefsIDs.isLogged
+import com.example.myapplication.objects.SharedPrefsIDs
+import com.example.myapplication.objects.SharedPrefsIDs.isLogged
 import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
 
@@ -14,10 +15,8 @@ class PresenterCatalog(private var view: CatalogActivity,private val sharedPref:
         model= UserModel()
         try {
             model.logIn(
-                sharedPref.getString(SharedPrefsIDs.loggedUserLogin, "empty")!!,
-                sharedPref.getString(
-                    SharedPrefsIDs.loggedUserPassword, "empty"
-                )!!
+                sharedPref.getString(SharedPrefsIDs.loggedUserLogin, "empty").toString(),
+                sharedPref.getString(SharedPrefsIDs.loggedUserPassword, "empty").toString()
             )
         }
         catch (exc: AuthException){
@@ -41,12 +40,6 @@ class PresenterCatalog(private var view: CatalogActivity,private val sharedPref:
             view.showToastUnableToLogIN()
             view.returnToLoginScreen()
         }
-    }
-
-    fun check(){
-        val result=model.check()
-        for (i in result.indices)
-            Log.d("debug", "Data: ${result[i]._id}")
     }
 
     private fun clearPrefs(){

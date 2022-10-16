@@ -2,11 +2,12 @@ package com.example.myapplication
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.example.myapplication.Consts.login_min_len
-import com.example.myapplication.Consts.password_min_len
-import com.example.myapplication.SharedPrefsIDs.isLogged
-import com.example.myapplication.SharedPrefsIDs.loggedUserLogin
-import com.example.myapplication.SharedPrefsIDs.loggedUserPassword
+import com.example.myapplication.objects.Consts.login_min_len
+import com.example.myapplication.objects.Consts.password_min_len
+import com.example.myapplication.objects.SharedPrefsIDs.isLogged
+import com.example.myapplication.objects.SharedPrefsIDs.loggedUserLogin
+import com.example.myapplication.objects.SharedPrefsIDs.loggedUserPassword
+import com.example.myapplication.interfaces.IAuthView
 import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
 

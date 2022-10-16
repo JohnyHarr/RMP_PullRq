@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.objects
 
 object Consts {
     const val app_id = "rmp_project-qnbwv"

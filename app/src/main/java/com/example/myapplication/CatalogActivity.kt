@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.objects.SharedPrefsIDs
 import com.example.myapplication.databinding.ActivityCatalogBinding
+import com.example.myapplication.interfaces.IToastRealmSessionErrors
+import com.example.myapplication.login_activities.MainActivity
 
 class CatalogActivity : AppCompatActivity(), IToastRealmSessionErrors {
     private lateinit var binding: ActivityCatalogBinding

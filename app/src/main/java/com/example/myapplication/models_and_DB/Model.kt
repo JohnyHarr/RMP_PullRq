@@ -1,8 +1,9 @@
 package com.example.myapplication
 
 import android.util.Log
-import com.example.myapplication.Consts.app_id
-import com.example.myapplication.Consts.db_sub_name
+import com.example.myapplication.objects.Consts.app_id
+import com.example.myapplication.objects.Consts.db_sub_name
+import com.example.myapplication.interfaces.IUserModel
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.internal.platform.runBlocking
@@ -16,8 +17,8 @@ import io.realm.kotlin.query.RealmResults
 
 
 class UserModel: IUserModel {
-    private lateinit var realmUserCfg: SyncConfiguration
-    private lateinit var realmUserDB: Realm
+    private var realmUserCfg: SyncConfiguration?=null
+    private val realmUserDB by lazy { realmUserCfg?.let { Realm.open(it) }}
     private val app=App.create(app_id)
 
     override fun logIn(_login: String, _password: String) :Boolean {
@@ -38,7 +39,7 @@ class UserModel: IUserModel {
 
 
             }
-            realmUserDB=Realm.open(realmUserCfg)
+
         }
         catch (exc: AuthException){throw exc}
         catch (exc: IllegalArgumentException){throw exc}
@@ -68,23 +69,23 @@ class UserModel: IUserModel {
     }
 
     override fun closeRealm() {
-        realmUserDB.close()
+        realmUserDB?.close()
     }
 
     override fun logOut() {
         runBlocking {
-            realmUserCfg.user.logOut()
+            realmUserCfg?.user?.logOut()
         }
-        realmUserDB.close()
+        realmUserDB?.close()
     }
 
     override suspend fun updateData(user: RealmUserData) {
-        realmUserDB.write{
+        realmUserDB?.write{
             copyToRealm(user)
         }
     }
 
-    override fun check(): RealmResults<RealmUserData> {
-        return realmUserDB.query<RealmUserData>().find()
+    override fun check(): RealmResults<RealmUserData>? {
+        return realmUserDB?.query<RealmUserData>()?.find()
     }
 }

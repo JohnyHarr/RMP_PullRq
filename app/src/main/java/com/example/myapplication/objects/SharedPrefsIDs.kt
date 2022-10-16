@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.objects
 
 object SharedPrefsIDs {
     const val sharedPrefName="SHARED_PREFS"
