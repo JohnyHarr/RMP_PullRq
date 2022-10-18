@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.models_and_DB
 
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey

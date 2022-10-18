@@ -1,34 +1,30 @@
-package com.example.myapplication.login_activities
+package com.example.myapplication.login_activities.fragments
 
-
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.*
-import com.example.myapplication.objects.SharedPrefsIDs.sharedPrefName
-import com.example.myapplication.databinding.ActivitySignUpBinding
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.myapplication.PresenterAuth
+import com.example.myapplication.R
+import com.example.myapplication.databinding.SignUpFragmentBinding
 import com.example.myapplication.interfaces.IAuthView
+import com.example.myapplication.login_activities.TextChangeWatcher
+import com.example.myapplication.objects.Consts
+import com.example.myapplication.objects.SharedPrefsIDs
 import kotlinx.coroutines.runBlocking
 
-
-class ActivitySignUp : AppCompatActivity(), IAuthView {
-   private val binding by lazy{ActivitySignUpBinding.inflate(layoutInflater)}
-   private val presenter by lazy {
-       PresenterAuth(this, getSharedPreferences(sharedPrefName, MODE_PRIVATE)) }
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(binding.root)
+class SignUpFragment: Fragment(R.layout.sign_up_fragment), IAuthView {
+    private val binding by lazy{SignUpFragmentBinding.bind(requireView())}
+    private val presenter by lazy { PresenterAuth(this, activity?.getSharedPreferences(
+        SharedPrefsIDs.sharedPrefLogInData,
+        Context.MODE_PRIVATE
+    ))}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.buttonSignUp.setOnClickListener{
-            showProgressBar()
             turnOffAllErrors()
             runBlocking {
                 if (presenter.createUser(
@@ -38,15 +34,13 @@ class ActivitySignUp : AppCompatActivity(), IAuthView {
                         binding.edLastnameLayout.editText?.text.toString().trim()
                     )
                 )
-                finish()
+                 findNavController().popBackStack()
             }
             hideProgressBar()
         }
+        Log.d("debug", "Sign Up fragment")
         binding.edLoginLayout.editText?.addTextChangedListener(TextChangeWatcher(this))
         binding.edPasswordLayout.editText?.addTextChangedListener(TextChangeWatcher(this))
-        presenter.init()
-
-        Log.d("debug", "onCreate completed")
     }
 
     override fun showPasswordToggle() {
@@ -55,12 +49,12 @@ class ActivitySignUp : AppCompatActivity(), IAuthView {
     }
 
     override fun hideKeyboard(){
-        val view=this.currentFocus
+        /*val view=this.currentFocus
         if (view!=null){
             val toHide=getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             toHide.hideSoftInputFromWindow(view.windowToken, 0)
         }
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)*/
     }
 
     override fun showProgressBar() {
@@ -72,11 +66,11 @@ class ActivitySignUp : AppCompatActivity(), IAuthView {
     }
 
     override fun showToastUnableToLogIN() {
-        Toast.makeText(this,getString(R.string.logInErrorConnectionIssue), Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(),getString(R.string.logInErrorConnectionIssue), Toast.LENGTH_LONG).show()
     }
 
     override fun showToastInternalRealmError() {
-        Toast.makeText(this, getString(R.string.unknownRealmError),Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), getString(R.string.unknownRealmError), Toast.LENGTH_LONG).show()
     }
 
     override fun showLogInError() {
@@ -113,11 +107,6 @@ class ActivitySignUp : AppCompatActivity(), IAuthView {
     }
 
     override fun enterAnotherScreen() {
-        val intent= Intent(this, CatalogActivity::class.java)
-        startActivity(intent)
-        presenter.deInit()
-        finish()
+
     }
-
-
 }

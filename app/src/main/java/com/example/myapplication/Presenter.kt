@@ -8,15 +8,17 @@ import com.example.myapplication.objects.SharedPrefsIDs.isLogged
 import com.example.myapplication.objects.SharedPrefsIDs.loggedUserLogin
 import com.example.myapplication.objects.SharedPrefsIDs.loggedUserPassword
 import com.example.myapplication.interfaces.IAuthView
+import com.example.myapplication.models_and_DB.RealmUserData
+import com.example.myapplication.models_and_DB.UserModel
 import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
 
 
-class PresenterAuth(private var view: IAuthView, private val sharedPref: SharedPreferences) {
+class PresenterAuth(private var view: IAuthView, private val sharedPref: SharedPreferences?) {
     private var model: UserModel?=null
 
     fun init(){
-        if(sharedPref.getBoolean(isLogged, false)) {
+        if(sharedPref?.getBoolean(isLogged, false) == true) {
                 view.enterAnotherScreen()
         }
     }
@@ -39,7 +41,7 @@ class PresenterAuth(private var view: IAuthView, private val sharedPref: SharedP
     }
 
     private fun saveUserPrefs(_login: String, _password: String){
-        sharedPref.edit(commit = true){
+        sharedPref?.edit(commit = true){
             putBoolean(isLogged, true)
             putString(loggedUserLogin, _login)
             putString(loggedUserPassword, _password)
@@ -87,7 +89,6 @@ class PresenterAuth(private var view: IAuthView, private val sharedPref: SharedP
             else {
                 view.enterAnotherScreen()
                 tryLogInAction(_login,_password)
-                saveUserPrefs(_login,_password)
             }
         }
         catch (err: ServiceException){

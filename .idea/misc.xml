@@ -8,6 +8,13 @@
         <entry key="..\:/Android/app/src/main/res/layout/activity_catalog.xml" value="0.22" />
         <entry key="..\:/Android/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/activity_catalog.xml" value="0.155078125" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/activity_main.xml" value="0.155078125" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/activity_sign_up.xml" value="0.155078125" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/catalog_fragment.xml" value="0.140234375" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/log_in_fragment.xml" value="0.18" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/sign_up_fragment.xml" value="0.154296875" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/splash_fragment.xml" value="0.154296875" />
       </map>
     </option>
   </component>

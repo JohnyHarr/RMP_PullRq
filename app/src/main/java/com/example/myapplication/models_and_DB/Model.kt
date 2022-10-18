@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.models_and_DB
 
 import android.util.Log
 import com.example.myapplication.objects.Consts.app_id

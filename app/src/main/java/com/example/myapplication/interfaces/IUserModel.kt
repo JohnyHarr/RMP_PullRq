@@ -1,6 +1,6 @@
 package com.example.myapplication.interfaces
 
-import com.example.myapplication.RealmUserData
+import com.example.myapplication.models_and_DB.RealmUserData
 import io.realm.kotlin.query.RealmResults
 
 interface IUserModel

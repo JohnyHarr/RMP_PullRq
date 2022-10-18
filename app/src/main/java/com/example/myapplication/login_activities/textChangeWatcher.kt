@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.login_activities
 
 import android.text.Editable
 import android.text.TextWatcher

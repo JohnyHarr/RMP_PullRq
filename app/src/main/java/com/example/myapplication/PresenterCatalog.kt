@@ -3,20 +3,22 @@ package com.example.myapplication
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.content.edit
+import com.example.myapplication.app_activities.fragments.CatalogFragment
+import com.example.myapplication.models_and_DB.UserModel
 import com.example.myapplication.objects.SharedPrefsIDs
 import com.example.myapplication.objects.SharedPrefsIDs.isLogged
 import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
 
-class PresenterCatalog(private var view: CatalogActivity,private val sharedPref: SharedPreferences) {
+class PresenterCatalog(private var view: CatalogFragment, private val sharedPref: SharedPreferences?) {
     private lateinit var model: UserModel
 
     fun init(){
         model= UserModel()
         try {
             model.logIn(
-                sharedPref.getString(SharedPrefsIDs.loggedUserLogin, "empty").toString(),
-                sharedPref.getString(SharedPrefsIDs.loggedUserPassword, "empty").toString()
+                sharedPref?.getString(SharedPrefsIDs.loggedUserLogin, "empty").toString(),
+                sharedPref?.getString(SharedPrefsIDs.loggedUserPassword, "empty").toString()
             )
         }
         catch (exc: AuthException){
@@ -43,7 +45,7 @@ class PresenterCatalog(private var view: CatalogActivity,private val sharedPref:
     }
 
     private fun clearPrefs(){
-        sharedPref.edit(commit = true){
+        sharedPref?.edit(commit = true){
             putBoolean(isLogged, false)
         }
     }
@@ -51,7 +53,7 @@ class PresenterCatalog(private var view: CatalogActivity,private val sharedPref:
 
     fun logOut(){
         Log.d("debug", "Logout")
-        sharedPref.edit(commit = true){
+        sharedPref?.edit(commit = true){
             putBoolean(isLogged, false)
         }
         model.logOut()
