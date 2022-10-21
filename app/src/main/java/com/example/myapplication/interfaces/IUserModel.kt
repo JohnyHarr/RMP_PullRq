@@ -10,6 +10,5 @@ interface IUserModel
     suspend fun updateData(user: RealmUserData)
     fun check(): RealmResults<RealmUserData>?
     fun logOut()
-    fun closeRealm()
 
 }
