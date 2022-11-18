@@ -1,122 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.fragment.app.FragmentContainerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/MainConstruct"
-    android:background="@color/bg_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:id="@+id/fragmentContainer"
+    tools:context=".MainActivity"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/nav_graph" />
 
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="172dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="50dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPasswordLayout">
-
-        <Button
-            android:id="@+id/log_in_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="@string/auth_button"
-            android:textColor="@color/text_color_but"
-            app:cornerRadius="30dp" />
-
-        <Button
-            android:id="@+id/buttonSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="@string/sign_up_button"
-            android:textColor="@color/buttons_color"
-            app:backgroundTint="@color/alpha_0"
-            app:backgroundTintMode="multiply"
-            app:cornerRadius="30dp"
-            app:strokeColor="@color/buttons_color"
-            app:strokeWidth="2dp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:gravity="center"
-            android:text="@string/greet"
-            android:textColor="#BEFFFFFF"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edLoginLayout"
-        style="@style/CustomOutlineBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/auth_login_hint"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:passwordToggleEnabled="false"
-        app:passwordToggleTint="@color/buttons_color">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/text_color"
-            tools:ignore="TextContrastCheck,TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edPasswordLayout"
-        style="@style/CustomOutlineBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="50dp"
-        android:hint="@string/auth_password_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edLoginLayout"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/buttons_color">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColorHint="@color/text_color"
-            tools:ignore="TextContrastCheck,TextContrastCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:gravity="center"
-        android:text="@string/greet"
-        android:textColor="#BEFFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

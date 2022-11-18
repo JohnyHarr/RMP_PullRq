@@ -14,17 +14,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-
-            android:name=".ActivitySignUp"
-            android:exported="false"
-
-            android:windowSoftInputMode="adjustResize"/>
-        <activity
-            android:name=".CatalogActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            />
-        <activity
             android:theme="@style/Theme.MyApplication"
             android:name=".MainActivity"
             android:exported="true"

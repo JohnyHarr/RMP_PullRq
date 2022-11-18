@@ -9,10 +9,11 @@
     <string name="auth_firstname_hint">Firstname</string>
     <string name="auth_lastname_hint">Lastname</string>
     <string name="pass_visibility">password visibility</string>
-    <string name="loginEmpty">Login must be at least 6 characters long</string>
     <string name="passwordEmpty">Password must be at least 6 characters long</string>
     <string name="loginAlreadyExists">Login already exists</string>
     <string name="logInError">Incorrect login or password</string>
+    <string name="loginInvalidFormat">Login should contain at least 5 only latin alphabet symbols and cannot contain only digits</string>
+    <string name="passwordInvalidFormat">Password should contain at least 6 only latin alphabet symbols and cannot contain only digits</string>
     <string name="logInErrorConnectionIssue">Seems like you have connection issues</string>
     <string name="userStoppedOrDeleted">Seems like your account was stopped</string>
     <string name="unknownRealmError">Seems like we\'re having problems with DB</string>

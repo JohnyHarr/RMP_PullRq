@@ -1,9 +1,10 @@
-package com.example.myapplication
+package com.example.myapplication.login_activities
 
 import android.text.Editable
 import android.text.TextWatcher
+import com.example.myapplication.interfaces.IAuthView
 
-class TextChangeWatcher(private val view: AuthView):TextWatcher {
+class TextChangeWatcher(private val view: IAuthView):TextWatcher {
     override fun afterTextChanged(s: Editable?) {
     }
 
@@ -12,5 +13,6 @@ class TextChangeWatcher(private val view: AuthView):TextWatcher {
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         view.turnOffAllErrors()
+        view.showPasswordToggle()
     }
 }
