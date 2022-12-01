@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.core.content.edit
 import com.example.myapplication.interfaces.ICatalog
 import com.example.myapplication.models_and_DB.QueryBuilder
-import com.example.myapplication.models_and_DB.RealmUserData
 import com.example.myapplication.models_and_DB.UserModel
 import com.example.myapplication.objects.SharedPrefsIDs.isLogged
 import io.realm.kotlin.mongodb.exceptions.ServiceException

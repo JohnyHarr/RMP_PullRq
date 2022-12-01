@@ -1,7 +1,6 @@
 package com.example.myapplication.models_and_DB
 
 import android.util.Log
-import io.realm.kotlin.Realm
 import io.realm.kotlin.mongodb.User
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
 import kotlinx.coroutines.runBlocking

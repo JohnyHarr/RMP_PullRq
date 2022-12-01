@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.login_activities
 
 import android.content.SharedPreferences
 import android.util.Log
@@ -47,7 +47,7 @@ class PresenterAuth(private var view: IAuthView, private val sharedPref: SharedP
             || _login.none { it in 'A'..'Z' || it in 'a'..'z' }
             || _password.length < password_min_len
         )
-            passwordIsValid=false;
+            passwordIsValid=false
         if(!passwordIsValid and !loginIsValid)
             throw CredentialsInvalidFormat("Invalid login and password format")
         if(!loginIsValid)

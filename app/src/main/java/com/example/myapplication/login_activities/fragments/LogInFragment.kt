@@ -11,7 +11,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.PresenterAuth
+import com.example.myapplication.login_activities.PresenterAuth
 import com.example.myapplication.R
 import com.example.myapplication.databinding.LogInFragmentBinding
 import com.example.myapplication.interfaces.IAuthView
