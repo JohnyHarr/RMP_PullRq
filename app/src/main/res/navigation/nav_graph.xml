@@ -33,7 +33,21 @@
     </fragment>
     <fragment
         android:id="@+id/catalogFragment"
-        android:name="com.example.myapplication.app_activities.fragments.CatalogFragment"
+        android:name="com.example.myapplication.main.CatalogFragment"
         android:label="catalog_fragment"
-        tools:layout="@layout/catalog_fragment" />
+        tools:layout="@layout/catalog_fragment_grid" >
+        <action
+            android:id="@+id/action_catalogFragment_to_pdpFragment"
+            app:destination="@id/pdpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pdpFragment"
+        android:name="com.example.myapplication.main.PdpFragment"
+        android:label="PdpFragment"
+        tools:layout="@layout/pdp_fragment">
+        <argument
+            android:name="itemId"
+            app:argType="string"
+            />
+    </fragment>
 </navigation>

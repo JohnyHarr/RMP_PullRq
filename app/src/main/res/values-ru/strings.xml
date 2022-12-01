@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Магазин</string>
+    <string name="greet">Мы рады видеть вас</string>
+    <string name="auth_button">Вход</string>
+    <string name="sign_up_button">Регистрация</string>
+    <string name="sign_up_button_text">Я новый пользователь</string>
+    <string name="auth_login_hint">Логин</string>
+    <string name="auth_password_hint">Пароль</string>
+    <string name="auth_firstname_hint">Имя</string>
+    <string name="auth_lastname_hint">Фамилия</string>
+    <string name="passwordEmpty">Пароль должен быть хотя бы 6 символов в длину</string>
+    <string name="loginAlreadyExists">Пользователь с таким именем уже существует</string>
+    <string name="logInError">Неправильный логин или пароль</string>
+    <string name="loginInvalidFormat">Логин должен состоять из 5 или более символов латинского алфавита и спец. символов</string>
+    <string name="passwordInvalidFormat">Пароль должен состоять из 6 или более символов латинского алфавита и спец. символов</string>
+    <string name="logInErrorConnectionIssue">Похоже, что у вас проблемы с подключением</string>
+    <string name="userStoppedOrDeleted">Похоже, что ваш аккаунт был приостановлен или удален</string>
+    <string name="unknownRealmError">Внутренняя проблема Realm</string>
+    <string name="price_filter">Цена</string>
+    <string name="color_filter">Цвет</string>
+    <string name="in_stock_filter">В наличии</string>
+    <string name="filters">Фильтры</string>
+    <string name="apply_filters">Применить</string>
+</resources>

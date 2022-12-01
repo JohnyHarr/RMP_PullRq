@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/filters">
+        <menu>
+            <item
+                android:id="@+id/menuPriceFilter"
+                android:title="@string/price_filter"
+                app:actionLayout="@layout/price_slider" />
+            <item
+                android:id="@+id/menuColorFilter"
+                android:title="@string/color_filter"
+                app:actionLayout="@layout/color_picker" />
+            <item
+                android:id="@+id/menuInStockFilter"
+                android:title="@string/in_stock_filter"
+                app:actionLayout="@layout/in_stock_filter" />
+            <item
+                android:id="@+id/menuSubmitFilters"
+                android:title=""
+                app:actionLayout="@layout/submit_filters" />
+        </menu>
+    </item>
+</menu>

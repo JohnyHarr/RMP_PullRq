@@ -50,6 +50,11 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment), IAuthView {
         binding?.edPasswordLayout?.editText?.addTextChangedListener(TextChangeWatcher(this))
     }
 
+    override fun onDestroy() {
+        presenter.onFragmentClose()
+        super.onDestroy()
+    }
+
     override fun showPasswordToggle() {
         binding?.edPasswordLayout?.isPasswordVisibilityToggleEnabled =
             binding?.edPasswordLayout?.editText?.text?.isNotEmpty() ?: false

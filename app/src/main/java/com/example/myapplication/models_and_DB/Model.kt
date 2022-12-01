@@ -8,6 +8,7 @@ import io.realm.kotlin.ext.query
 import io.realm.kotlin.internal.platform.runBlocking
 import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.Credentials
+import io.realm.kotlin.mongodb.User
 import io.realm.kotlin.mongodb.exceptions.AuthException
 import io.realm.kotlin.mongodb.exceptions.InvalidCredentialsException
 import io.realm.kotlin.mongodb.exceptions.ServiceException
@@ -19,18 +20,21 @@ import io.realm.kotlin.query.RealmResults
 class UserModel : IUserModel {
     private var realmUserCfg: SyncConfiguration? = RealmUserDB.getSyncCfg()
     private var realmUserDB: Realm? = realmUserCfg?.let {
-        RealmUserDB.getInstance(it)
+        Realm.open(it)
+        //RealmUserDB.getInstance(it)
     }
+    private var user: User?=null
+
     private val app = App.create(Consts.app_id)
 
     override fun logIn(_login: String, _password: String): Boolean {
         try {
             Log.d("debug", "trying to log in")
             runBlocking {
-                val user = app.login(Credentials.emailPassword(_login, _password))
-                realmUserCfg = RealmUserDB.getSyncCfg(user, _login)
-                realmUserDB = realmUserCfg?.let {
-                    RealmUserDB.getInstance(it)
+                user = app.login(Credentials.emailPassword(_login, _password))
+               user?.let { realmUserCfg = RealmUserDB.getSyncCfg(it, _login) }
+                realmUserCfg?.let {
+                    realmUserDB = Realm.open(it)
                 }
             }
         } catch (exc: AuthException) {
@@ -67,10 +71,6 @@ class UserModel : IUserModel {
     override fun logOut() {
         try {
             runBlocking {
-                if (realmUserCfg == null)
-                    Log.d("debug", "realmUserCfg is null")
-                if (realmUserDB == null)
-                    Log.d("debug", "realmUserDB is null")
                 app.currentUser?.logOut()
                 realmUserDB?.close()
             }
@@ -87,7 +87,51 @@ class UserModel : IUserModel {
         }
     }
 
-    override fun check(): RealmResults<RealmUserData>? {
-        return realmUserDB?.query<RealmUserData>()?.find()
+    suspend fun insertTestItemData(item: RealmItemData){
+        Log.d("debug", "trying to write data")
+        realmUserDB?.write {
+            copyToRealm(item)
+        }
+    }
+
+    override fun check(): RealmResults<RealmItemData>? {
+        val results=realmUserDB?.query<RealmItemData>()?.find()
+        Log.d("debug", "Query elems: ")
+        results?.forEach { it-> Log.d("debug", "id: "+ it._id+" descr "+it.description+" inStock: "+it.inStock+" itemName: "
+                +it.itemName+" price "+it.price+" color: "+it.color) }
+        return results
+    }
+
+    override fun getData(query: String): RealmResults<RealmItemData>? {
+        if(query=="")
+            return null
+        val results=realmUserDB?.query<RealmItemData>(query)?.find()
+        Log.d("debug", "Query elems: ")
+        results?.forEach { it-> Log.d("debug", "id: "+ it._id+" descr "+it.description+" inStock: "+it.inStock+" itemName: "
+                +it.itemName+" price "+it.price+" color: "+it.color) }
+        return results
+    }
+
+    override fun getMaxPrice(): Int? {
+        val result= realmUserDB?.query<RealmItemData>()?.max("price", Int::class)?.find()
+                Log.d("debug", "Max price: $result")
+        return result
+    }
+
+    override fun getUser(): RealmUserData? {
+       return realmUserDB?.query<RealmUserData>("_id = $0", RealmUserDB.getLogin())?.find()?.first()
+    }
+
+    override fun getItem(id: String):RealmItemData? {
+        return try{
+            realmUserDB?.query<RealmItemData>("_id = $0", id)?.find()?.first()
+        } catch (exc: Exception){
+            null
+        }
+    }
+
+    override fun close() {
+        if(realmUserDB?.isClosed()==false)
+            realmUserDB?.close()
     }
 }

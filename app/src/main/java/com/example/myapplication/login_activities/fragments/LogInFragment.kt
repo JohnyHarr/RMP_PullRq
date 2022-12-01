@@ -66,6 +66,11 @@ class LogInFragment : Fragment(R.layout.log_in_fragment), IAuthView {
         Log.d("debug", "LogIn fragment")
     }
 
+    override fun onDestroy() {
+        presenter.onFragmentClose()
+        super.onDestroy()
+    }
+
     override fun hideKeyboard() {
         activity?.onWindowFocusChanged(true)
         val view = activity?.currentFocus

@@ -9,13 +9,30 @@
         <entry key="..\:/Android/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Android/app/src/main/res/layout/log_in_fragment.xml" value="0.21345628415300547" />
+        <entry key="..\:/AndroidPull/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.214" />
+        <entry key="..\:/AndroidPull/app/src/main/res/drawable/ic_baseline_check_circle_24.xml" value="0.332" />
+        <entry key="..\:/AndroidPull/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.214" />
+        <entry key="..\:/AndroidPull/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.332" />
+        <entry key="..\:/AndroidPull/app/src/main/res/drawable/ic_launcher_background.xml" value="0.214" />
         <entry key="..\:/AndroidPull/app/src/main/res/layout/activity_catalog.xml" value="0.155078125" />
         <entry key="..\:/AndroidPull/app/src/main/res/layout/activity_main.xml" value="0.155078125" />
         <entry key="..\:/AndroidPull/app/src/main/res/layout/activity_sign_up.xml" value="0.155078125" />
-        <entry key="..\:/AndroidPull/app/src/main/res/layout/catalog_fragment.xml" value="0.140234375" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/catalog_fragment.xml" value="0.22" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/catalog_fragment_grid.xml" value="0.25" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/catalog_item.xml" value="0.24269005847953215" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/color_picker.xml" value="0.25" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/in_stock_filter.xml" value="0.25" />
         <entry key="..\:/AndroidPull/app/src/main/res/layout/log_in_fragment.xml" value="0.18" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/nav_draw_header.xml" value="0.33" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/pdp_fragment.xml" value="0.3643122676579926" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/price_slider.xml" value="0.20989583333333334" />
         <entry key="..\:/AndroidPull/app/src/main/res/layout/sign_up_fragment.xml" value="0.154296875" />
         <entry key="..\:/AndroidPull/app/src/main/res/layout/splash_fragment.xml" value="0.154296875" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/submit_filters.xml" value="0.33" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/switch_item.xml" value="0.2" />
+        <entry key="..\:/AndroidPull/app/src/main/res/layout/toolbar.xml" value="0.33" />
+        <entry key="..\:/AndroidPull/app/src/main/res/menu/bottom_nav.xml" value="0.33" />
+        <entry key="..\:/AndroidPull/app/src/main/res/menu/filters_drawer.xml" value="0.20885416666666667" />
       </map>
     </option>
   </component>

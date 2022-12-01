@@ -15,4 +15,9 @@
         <item name="hintEnabled">true</item>
         <item name="hintTextColor">@color/buttons_color</item>
     </style>
+    
+    <style name="CustomSwitchCompat" parent="TextAppearance.AppCompat.Widget.Switch">
+        <item name="colorPrimary">@color/bg_color</item>
+        <item name="colorAccent">@color/buttons_color</item>
+    </style>
 </resources>
