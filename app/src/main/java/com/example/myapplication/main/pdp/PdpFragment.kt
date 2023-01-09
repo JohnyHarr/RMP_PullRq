@@ -1,5 +1,6 @@
 package com.example.myapplication.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,10 +32,13 @@ class PdpFragment: Fragment(R.layout.pdp_fragment), IPdp {
         super.onDestroy()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun setupViewWithData(itemData: RealmItemData) {
         Picasso.get().load(itemData._id).into(binding?.pdpImg)
         binding?.tvItemTitle?.text=itemData.itemName
         binding?.tvDescription?.text=itemData.description
+        binding?.tvPrice?.text="${getString(R.string.tvPrice)}: ${itemData.price}"
+        binding?.colorIcon?.color=itemData.color
     }
 
 }
