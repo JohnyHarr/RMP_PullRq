@@ -11,7 +11,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.PresenterAuth
+import com.example.myapplication.login_activities.PresenterAuth
 import com.example.myapplication.R
 import com.example.myapplication.databinding.LogInFragmentBinding
 import com.example.myapplication.interfaces.IAuthView
@@ -64,6 +64,11 @@ class LogInFragment : Fragment(R.layout.log_in_fragment), IAuthView {
             hideKeyboard()
         }
         Log.d("debug", "LogIn fragment")
+    }
+
+    override fun onDestroy() {
+        presenter.onFragmentClose()
+        super.onDestroy()
     }
 
     override fun hideKeyboard() {

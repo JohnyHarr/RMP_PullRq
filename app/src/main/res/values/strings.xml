@@ -8,7 +8,7 @@
     <string name="auth_password_hint">Password</string>
     <string name="auth_firstname_hint">Firstname</string>
     <string name="auth_lastname_hint">Lastname</string>
-    <string name="pass_visibility">password visibility</string>
+    <string name="pass_visibility" translatable="false">password visibility</string>
     <string name="passwordEmpty">Password must be at least 6 characters long</string>
     <string name="loginAlreadyExists">Login already exists</string>
     <string name="logInError">Incorrect login or password</string>
@@ -17,5 +17,10 @@
     <string name="logInErrorConnectionIssue">Seems like you have connection issues</string>
     <string name="userStoppedOrDeleted">Seems like your account was stopped</string>
     <string name="unknownRealmError">Seems like we\'re having problems with DB</string>
+    <string name="price_filter">Price</string>
+    <string name="color_filter">Color</string>
+    <string name="in_stock_filter">In stock</string>
+    <string name="filters">Filters</string>
+    <string name="apply_filters">Apply</string>
 
 </resources>

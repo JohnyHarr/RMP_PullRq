@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="buttons_color">#3A46AC</color>
-    <color name="bg_color">#BF000017</color>
+    <color name="bg_color">#000017</color>
     <color name="mtrl_textinput_default_box_stroke_color" >#6A6A6A</color>
     <color name="text_color">#6A6A6A</color>
     <color name="text_color_but">#BEFFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="nav_bar">#181833</color>
 </resources>

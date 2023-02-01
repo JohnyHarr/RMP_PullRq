@@ -10,7 +10,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.PresenterAuth
+import com.example.myapplication.login_activities.PresenterAuth
 import com.example.myapplication.R
 import com.example.myapplication.databinding.SignUpFragmentBinding
 import com.example.myapplication.interfaces.IAuthView
@@ -48,6 +48,11 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment), IAuthView {
         Log.d("debug", "Sign Up fragment")
         binding?.edLoginLayout?.editText?.addTextChangedListener(TextChangeWatcher(this))
         binding?.edPasswordLayout?.editText?.addTextChangedListener(TextChangeWatcher(this))
+    }
+
+    override fun onDestroy() {
+        presenter.onFragmentClose()
+        super.onDestroy()
     }
 
     override fun showPasswordToggle() {
